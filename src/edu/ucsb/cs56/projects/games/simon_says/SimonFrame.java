@@ -13,7 +13,7 @@ public class SimonFrame extends JFrame {
     public SimonFrame() {
 	super("Simon"); 
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-	this.setSize(640,480);
+	this.setSize(300,300);
 	this.setVisible(true);
     }
 

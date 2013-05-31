@@ -1,4 +1,4 @@
-//package edu.ucsb.cs56.projects.games.simon_says;
+package edu.ucsb.cs56.projects.games.simon_says;
 
 import java.awt.*;
 import javax.swing.*;
@@ -11,7 +11,7 @@ public class SimonFrame extends JFrame {
      */
 
     public SimonFrame() {
-	super("Simon Says"); 
+	super("Simon"); 
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
 	this.setSize(640,480);
 	this.setVisible(true);

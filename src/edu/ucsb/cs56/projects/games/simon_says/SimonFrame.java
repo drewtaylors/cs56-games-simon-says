@@ -10,10 +10,11 @@ import java.awt.event.*;
 public class SimonFrame extends JFrame {
 
     /** A no-arg constructor which builds the skeleton for the
-     *  game's frame, generating an empty frame of a particular size. 
+     *  game's frame, generating an empty frame of a particular size, 
+     *  and adding all of the needed JComponents to that frame
      */
     public SimonFrame() {
-	super("Simon"); 
+	super("Simon"); // Window header title
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
 	this.setSize(300,300);
 	
@@ -25,8 +26,9 @@ public class SimonFrame extends JFrame {
 	this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
 	this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));
 
+	this.getContentPane().setBackground(Color.BLACK); // color borders of frame black
 
-	// Generate all of the buttons, constructor automatically assings color and sets preferred size
+	// Generate all four the buttons, constructor automatically assings color and sets preferred size
 	SimonButton redButton = new SimonButton(Color.RED);
 	SimonButton greenButton = new SimonButton(Color.GREEN);
 	SimonButton yellowButton = new SimonButton(Color.YELLOW);
@@ -36,39 +38,23 @@ public class SimonFrame extends JFrame {
 	JPanel center = new JPanel(new BorderLayout());
 	this.getContentPane().add(BorderLayout.CENTER, center);
 
-	// Top section of center will 
+	// Top section of center
 	JPanel top = new JPanel(new BorderLayout());
 	center.add(BorderLayout.NORTH, top);
 
+	// Bottom section of center
 	JPanel bottom = new JPanel(new BorderLayout());
 	center.add(BorderLayout.SOUTH, bottom);
 
-	top.add(BorderLayout.WEST, greenButton);
-	top.add(BorderLayout.EAST, redButton);
-	bottom.add(BorderLayout.WEST, yellowButton);
-	bottom.add(BorderLayout.EAST, blueButton);
+	top.add(BorderLayout.WEST, greenButton); // top section of center contains green on the left...
+	top.add(BorderLayout.EAST, redButton); // ...and red on the right
+	bottom.add(BorderLayout.WEST, yellowButton); // bottom section of center contains yellow on the left...
+	bottom.add(BorderLayout.EAST, blueButton); // ...and blue on the right
 
-	/*
-	JPanel center = new JPanel(new BorderLayout());
-	center.setBackground(Color.GRAY);
-	this.getContentPane().add(center, BorderLayout.CENTER);
-
-	JPanel left = new JPanel(new BorderLayout());
-	left.setBackground(Color.gray);
-	this.getContentPane().add(left, BorderLayout.WEST);
-
-	JPanel right = new JPanel(new BorderLayout());
-	right.setBackground(Color.gray);
-	this.getContentPane().add(right, BorderLayout.EAST);
-
-	center.add(BorderLayout.NORTH, redButton);
-	this.getContentPane().add(Box.createRigidArea(new Dimension(0,10)));
-	left.add(BorderLayout.CENTER, greenButton);
-	center.add(BorderLayout.SOUTH, yellowButton);
-	right.add(BorderLayout.CENTER, blueButton);
-   
-	*/
-	this.setBackground(Color.BLACK);
+	// Color all of the background within the border black as well
+	top.setBackground(Color.BLACK);
+	bottom.setBackground(Color.BLACK);
+	center.setBackground(Color.BLACK);
     }
 
     /** Method called by main() once all components have been added by frame
@@ -79,6 +65,8 @@ public class SimonFrame extends JFrame {
 	this.setVisible(true);
     }
 
+    /** A main() method which calls for the frame to be displayed
+     */
     public static void main(String[] args) {
 	SimonFrame frame = new SimonFrame();
 	frame.display();

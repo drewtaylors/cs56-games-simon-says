@@ -13,7 +13,8 @@ public class SimonFlash
  {
      private ArrayList<Integer>  userButtonPresses;
      private ArrayList<Integer> computerButtonPresses;
-     private SimonButton[] buttons;
+     private SimonButton[] buttons; // order: Green Red, Yellow, Blue
+     private int placeInSequence; // will be zero-based
 
      public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
 	 SimonFlash sequence = new SimonFlash(flashes, buttons);
@@ -24,12 +25,14 @@ public class SimonFlash
 	 userButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = new ArrayList<Integer>();
 	 buttons = new SimonButton[4];
+	 placeInSequence = 0;
      }
 
      public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons) {
 	 userButtonPresses = new ArrayList<Integer>(); // points all instance variables to same arrays passed in
 	 this.computerButtonPresses = flashes;         // no duplication
 	 this.buttons = buttons;
+	 this.placeInSequence = 0;
      }
 
 
@@ -52,16 +55,33 @@ public class SimonFlash
 	     }
 	 } catch (InterruptedException ex) { ex.printStackTrace(); }
 
-	 for (SimonButton button : buttons) {
-	     button.addActionListener(new ButtonPushListener());
-	     button.setEnabled(true);
-	 }
-	 userButtonPresses = new ArrayList<Integer>();
+	 buttons[0].addActionListener(new GreenPushListener());
+	 buttons[1].addActionListener(new RedPushListener());
+	 buttons[2].addActionListener(new YellowPushListener());
+	 buttons[3].addActionListener(new BluePushListener());
      }
-
-     public class ButtonPushListener implements ActionListener {
+     public class GreenPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
-	     
+	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	     placeInSequence++;
+	 }
+     }
+     public class RedPushListener implements ActionListener {
+	 public void actionPerformed(ActionEvent e) {
+	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	     placeInSequence++;
+	 }
+     }
+     public class YellowPushListener implements ActionListener {
+	 public void actionPerformed(ActionEvent e) {
+	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	     placeInSequence++;
+	 }
+     }
+     public class BluePushListener implements ActionListener {
+	 public void actionPerformed(ActionEvent e) {
+	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	     placeInSequence++;
 	 }
      }
 

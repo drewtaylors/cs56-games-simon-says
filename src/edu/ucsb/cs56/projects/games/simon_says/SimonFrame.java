@@ -3,6 +3,7 @@ package edu.ucsb.cs56.projects.games.simon_says;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
 /** JFrame which contains all of the components for the Simon game.
  */
@@ -99,7 +100,8 @@ public class SimonFrame extends JFrame {
 	*/
 	// DEBUG
 	//yellowButton.addActionListener(new SimonListener());
-	int test_array[] = {0, 1, 2, 3};
+	ArrayList<Integer> test_array = new ArrayList<Integer>();
+	test_array.add(2); test_array.add(0); test_array.add(0);
 	try { Thread.sleep(2000); } catch (InterruptedException ex) { }
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
 	SimonFlash.FlashSequence(test_array, button_array);

@@ -4,6 +4,7 @@ package edu.ucsb.cs56.projects.games.simon_says;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
 
 /** Flashes a sequence of buttons
  */
@@ -12,7 +13,7 @@ public class SimonFlash
  {
      /** Flashes in sequential order a sequence of numbers
      */
-     public static void  FlashSequence(int[] flashes, SimonButton[] buttons) {
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
 	 try {
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
@@ -32,9 +33,9 @@ public class SimonFlash
 
 	 for (SimonButton button : buttons) {
 	     button.setEnabled(true);
-
-
 	 }
+
+	 
      }
 } 
 

@@ -38,7 +38,7 @@ public class SimonFlash
 
      /** Flashes in sequential order a sequence of numbers
      */
-     public void go() {
+     private void go() {
 	 try {
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
@@ -55,35 +55,53 @@ public class SimonFlash
 	     }
 	 } catch (InterruptedException ex) { ex.printStackTrace(); }
 
-	 buttons[0].addActionListener(new GreenPushListener());
+	 for (SimonButton button : buttons) { // reactivate buttons
+	     button.setEnabled(true);
+	 }
+
+	 buttons[0].addActionListener(new GreenPushListener()); // listen for inputs
 	 buttons[1].addActionListener(new RedPushListener());
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
      }
+
+     private void  lossCheck(int buttonNum) {
+	 userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	 placeInSequence++;
+	 boolean loss = false;
+	 if (computerButtonPresses.get(placeInSequence) != buttonNum) {
+	     loss = true;
+	     this.endRound(loss);
+	 }
+	 else if (placeInSequence >= computerButtonPresses.size()) {
+	     loss = false;
+	     this.endRound(loss);
+	 }
+     }
+
+     private void endRound(boolean didWeLose) {
+
+     }
+
      public class GreenPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
-	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
-	     placeInSequence++;
+	     lossCheck(0);
 	 }
      }
      public class RedPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
-	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
-	     placeInSequence++;
+	     lossCheck(1);
 	 }
      }
      public class YellowPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
-	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
-	     placeInSequence++;
+	     lossCheck(2);
 	 }
      }
      public class BluePushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
-	     userButtonPresses.add(computerButtonPresses.get(placeInSequence));
-	     placeInSequence++;
+	     lossCheck(3);
 	 }
      }
-
 } 
 

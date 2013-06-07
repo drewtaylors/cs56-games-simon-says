@@ -18,7 +18,6 @@ public class SimonFlash
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
 	     }
-
 	     for (int button_num : flashes) { // iterate through each sequence element
 		 Thread.sleep(300);
 		 SimonButton button = buttons[button_num]; // for readiblity
@@ -33,6 +32,7 @@ public class SimonFlash
 
 	 for (SimonButton button : buttons) {
 	     button.setEnabled(true);
+
 	 }
 
 	 

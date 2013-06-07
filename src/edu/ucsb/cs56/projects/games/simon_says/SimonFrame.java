@@ -14,6 +14,12 @@ public class SimonFrame extends JFrame {
     SimonButton greenButton;
     SimonButton yellowButton;
     SimonButton blueButton;
+    JButton startButton;
+
+    JPanel center;
+    JPanel top;
+    JPanel bottom;
+    JPanel bottomInner;
 
     /** A no-arg constructor which builds the skeleton for the
      *  game's frame, generating an empty frame of a particular size, 
@@ -25,8 +31,8 @@ public class SimonFrame extends JFrame {
 	this.setSize(300,300);
 	
 	// Filler areas that former border around frame
-	Dimension fillerSizeVert = new Dimension(0, 30);
-	Dimension fillerSizeHoriz = new Dimension(30, 30);
+	final Dimension fillerSizeVert = new Dimension(0, 30);
+	final Dimension fillerSizeHoriz = new Dimension(30, 30);
 	this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
@@ -41,15 +47,15 @@ public class SimonFrame extends JFrame {
 	this.blueButton = new SimonButton(Color.BLUE);
 
 	// Generate center of frame for buttons
-	JPanel center = new JPanel(new BorderLayout());
+	 center = new JPanel(new BorderLayout());
 	this.getContentPane().add(BorderLayout.CENTER, center);
 
 	// Top section of center
-	JPanel top = new JPanel(new BorderLayout());
+	top = new JPanel(new BorderLayout());
 	center.add(BorderLayout.NORTH, top);
 
 	// Bottom section of center
-	JPanel bottom = new JPanel(new BorderLayout());
+	bottom = new JPanel(new BorderLayout());
 	center.add(BorderLayout.SOUTH, bottom);
 
 	// Finally, add buttons to panels
@@ -59,11 +65,14 @@ public class SimonFrame extends JFrame {
 	bottom.add(BorderLayout.EAST, blueButton); // ...and blue on the right
 
 	// Add Start button to bottom to Filler area
-	JButton startButton = new JButton("Start");
-	JPanel bottom_border = new JPanel();
-	this.getContentPane().add(BorderLayout.SOUTH, bottom_border);
-	bottom_border.setBackground(Color.BLACK);
-        bottom_border.add(startButton);
+	startButton = new JButton("Start");
+	bottomInner = new JPanel(); // Create a panel to put button so button doesn't span whole border
+	bottomInner.add(startButton);
+	this.bottomInner.add(Box.createRigidArea(fillerSizeVert)); // Makes sure that when button is deleted, the filler area
+	                                                           // of the proper size will remain behind it
+	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //
+
+	
 
 	startButton.addActionListener(new StartListener());
 
@@ -71,13 +80,16 @@ public class SimonFrame extends JFrame {
 	top.setBackground(Color.BLACK);
 	bottom.setBackground(Color.BLACK);
 	center.setBackground(Color.BLACK);
+	bottomInner.setBackground(Color.BLACK);
     }
 
 
     public class StartListener implements ActionListener {
 	public void actionPerformed(ActionEvent ex) {
-	    System.out.println("It worked");
-	    
+	    bottomInner.remove(startButton); // erase button from screen
+	    bottomInner.revalidate();
+	    bottomInner.repaint();
+	    startGame();
 	}
     }
     /** Method called by main() once all components have been added by frame
@@ -101,7 +113,9 @@ public class SimonFrame extends JFrame {
 	// DEBUG
 	//yellowButton.addActionListener(new SimonListener());
 	ArrayList<Integer> test_array = new ArrayList<Integer>();
-	test_array.add(2); test_array.add(0); test_array.add(0);
+
+	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
+
 	try { Thread.sleep(2000); } catch (InterruptedException ex) { }
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
 	SimonFlash.FlashSequence(test_array, button_array);
@@ -110,6 +124,10 @@ public class SimonFrame extends JFrame {
     }
     /** A main() method which calls for the frame to be displayed
      */
+
+    public void startGame() {
+	
+    }
     public static void main(String[] args) {
 	SimonFrame frame = new SimonFrame();
 	frame.display();

@@ -29,6 +29,14 @@ public class SimonButton extends JButton {
 	this.setBackground(color);
     }
 
+    /** Removes actionListeners so-as to disable user-interactivity features temporarily
+     *
+     */
+    public void removeActionListeners() {
+	for (ActionListener listener : this.getActionListeners()) {
+	    this.removeActionListener(listener);
+	}
+    }
 
     /** Empty main method. If code were added to it, could be used for testing
      * if desired.

@@ -14,6 +14,7 @@ public class SimonFlash
      private ArrayList<Integer>  userButtonPresses;
      private ArrayList<Integer> computerButtonPresses;
      private SimonButton[] buttons; // order: Green Red, Yellow, Blue
+     private int currentButton; 
      private int placeInSequence; // will be zero-based
 
      public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
@@ -25,14 +26,14 @@ public class SimonFlash
 	 userButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = new ArrayList<Integer>();
 	 buttons = new SimonButton[4];
-	 placeInSequence = 0;
+	 currentButton = 0;
      }
 
      public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons) {
 	 userButtonPresses = new ArrayList<Integer>(); // points all instance variables to same arrays passed in
 	 this.computerButtonPresses = flashes;         // no duplication
 	 this.buttons = buttons;
-	 this.placeInSequence = 0;
+	 this.currentButton = flashes.get(0);
      }
 
 
@@ -66,18 +67,29 @@ public class SimonFlash
      }
 
      private void  lossCheck(int buttonNum) {
-	 userButtonPresses.add(computerButtonPresses.get(placeInSequence));
+	 userButtonPresses.add(computerButtonPresses.get(currentButton));
 	 placeInSequence++;
-	 boolean didWeLose = false;
-	 if (computerButtonPresses.get(placeInSequence) != buttonNum) {
+	 boolean didWeLose = false; // initialization just in case for debug
+
+	 //debug
+	 System.out.println(currentButton);
+	 System.out.println(buttonNum);
+	 System.out.println(placeInSequence);
+	 System.out.println(computerButtonPresses.size());
+	 if (currentButton != buttonNum) {
 	     didWeLose = true;
+	     //System.out.println(computerButtonPresses.get(currentButton) 
 	     this.endRound(didWeLose); // we lost
 	 }
-	 else if (placeInSequence >= computerButtonPresses.size()) {
+	 else if (placeInSequence > computerButtonPresses.size()) {
+	     //Debug
+	     System.out.println("placeinSequence bigger than computerButtonPresses.size()");
+
 	     didWeLose = false;
 	     this.endRound(didWeLose); // we did *not* lose; game continues
+	     currentButton = computerButtonPresses.get(placeInSequence);
 	 }
-	 else if (computerButtonPresses.get(placeInSequence) == buttonNum) {
+	 else if (currentButton == buttonNum) {
 	     //
 	 }
      }

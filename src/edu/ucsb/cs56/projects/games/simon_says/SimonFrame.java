@@ -21,9 +21,7 @@ public class SimonFrame extends JFrame {
     JPanel bottom;
     JPanel bottomInner;
 
-    /** A no-arg constructor which builds the skeleton for the
-     *  game's frame, generating an empty frame of a particular size, 
-     *  and adding all of the needed JComponents to that frame
+    /** No-arg frame constructor, sets up frame and layout of panels and components
      */
     public SimonFrame() {
 	super("Simon"); // Window header title
@@ -40,7 +38,7 @@ public class SimonFrame extends JFrame {
         
 	this.getContentPane().setBackground(Color.BLACK); // color borders of frame black
 
-	// Generate all four the buttons, constructor automatically assings color and sets preferred size
+	// Generate all four the buttons, constructor automatically assigns color and sets preferred size
 	this.redButton = new SimonButton(Color.RED);
 	this.greenButton = new SimonButton(Color.GREEN);
 	this.yellowButton = new SimonButton(Color.YELLOW);
@@ -91,6 +89,8 @@ public class SimonFrame extends JFrame {
 	    bottomInner.revalidate();
 	    bottomInner.repaint();
 
+	    startButton.removeActionListener(this);
+
 	    new Thread(new Runnable() {
 		    public void run() {
 			startGame();
@@ -136,11 +136,18 @@ public class SimonFrame extends JFrame {
      */
 
     public void startGame() {
+
+	Random randomGen = new Random(System.currentTimeMillis());
+	int randomNum = randomGen.nextInt(4);
+	int randomNum2 = (int)( Math.random() * 3.9999999); 
 	
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
-	ArrayList<Integer> test_array = new ArrayList<Integer>();
-	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
-	SimonFlash flash = new SimonFlash(test_array, button_array, startButton);
+	//ArrayList<Integer> test_array = new ArrayList<Integer>();
+	//	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
+	
+	ArrayList<Integer> test_array =  new ArrayList<Integer>();
+	test_array.add(randomNum2); // one element to start off with
+	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, bottomInner);
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }

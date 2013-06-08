@@ -68,19 +68,28 @@ public class SimonFlash
      private void  lossCheck(int buttonNum) {
 	 userButtonPresses.add(computerButtonPresses.get(placeInSequence));
 	 placeInSequence++;
-	 boolean loss = false;
+	 boolean didWeLose = false;
 	 if (computerButtonPresses.get(placeInSequence) != buttonNum) {
-	     loss = true;
-	     this.endRound(loss);
+	     didWeLose = true;
+	     this.endRound(didWeLose); // we lost
 	 }
 	 else if (placeInSequence >= computerButtonPresses.size()) {
-	     loss = false;
-	     this.endRound(loss);
+	     didWeLose = false;
+	     this.endRound(didWeLose); // we did *not* lose; game continues
+	 }
+	 else if (computerButtonPresses.get(placeInSequence) == buttonNum) {
+	     //
 	 }
      }
 
      private void endRound(boolean didWeLose) {
-
+	 if (didWeLose == true) {
+	     System.out.println("You lost! Press start to begin again.");
+	 }
+	 else if (didWeLose == false) {
+	     System.out.println("Success! Onto the next round!");
+	     // initiate new round
+	 }
      }
 
      public class GreenPushListener implements ActionListener {

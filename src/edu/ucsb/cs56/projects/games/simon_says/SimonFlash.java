@@ -30,8 +30,18 @@ public class SimonFlash
      }
 
      public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons) {
-	 userButtonPresses = new ArrayList<Integer>(); // points all instance variables to same arrays passed in
-	 this.computerButtonPresses = flashes;         // no duplication
+	 userButtonPresses = new ArrayList<Integer>();
+	 //	 this.computerButtonPresses = new ArrayList<Integer>();
+	 computerButtonPresses = flashes;
+	 System.out.println(flashes.get(0));
+	 System.out.println(flashes.get(1));
+	 System.out.println(flashes.get(2)+"\n");
+
+	 //computerButtonPresses.addAll(flashes);
+	 //Debug
+	 System.out.println(computerButtonPresses.get(0));
+	 System.out.println(computerButtonPresses.get(1));
+	 System.out.println(computerButtonPresses.get(2));
 	 this.buttons = buttons;
 	 this.currentButton = flashes.get(0);
      }
@@ -72,26 +82,29 @@ public class SimonFlash
 	 boolean didWeLose = false; // initialization just in case for debug
 
 	 //debug
-	 System.out.println(currentButton);
-	 System.out.println(buttonNum);
-	 System.out.println(placeInSequence);
-	 System.out.println(computerButtonPresses.size());
+	 System.out.println("current button: "+currentButton);
+	 System.out.println("button number: "+buttonNum);
+	 System.out.println("place in sequence: "+placeInSequence);
+	 System.out.println("size of computerButtonPresses: "+computerButtonPresses.size());
 	 if (currentButton != buttonNum) {
 	     didWeLose = true;
-	     //System.out.println(computerButtonPresses.get(currentButton) 
+	     //System.out.println(computerButtonPresses.get(currentButton)
+	 currentButton = computerButtonPresses.get(placeInSequence); 
 	     this.endRound(didWeLose); // we lost
 	 }
-	 else if (placeInSequence > computerButtonPresses.size()) {
+	 else if (placeInSequence >= computerButtonPresses.size()) {
 	     //Debug
 	     System.out.println("placeinSequence bigger than computerButtonPresses.size()");
 
 	     didWeLose = false;
 	     this.endRound(didWeLose); // we did *not* lose; game continues
-	     currentButton = computerButtonPresses.get(placeInSequence);
+
 	 }
 	 else if (currentButton == buttonNum) {
 	     //
+	     currentButton = computerButtonPresses.get(placeInSequence);
 	 }
+
      }
 
      private void endRound(boolean didWeLose) {

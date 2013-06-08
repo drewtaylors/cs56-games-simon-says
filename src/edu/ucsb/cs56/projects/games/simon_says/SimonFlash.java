@@ -66,15 +66,12 @@ public class SimonFlash
 			     ///   button.removeActionListeners();
 			 }
 			 for (int button_num : computerButtonPresses) { // iterate through each sequence element
-			     Thread.sleep(400);
+			     Thread.sleep(500);
 			     SimonButton button = buttons[button_num]; // for readiblity
-			     
 			     //System.out.println("hey"); // DEBUG
 			     Color buttonColor = button.getBackground();
 			     button.setBackground(Color.WHITE);
-
-			     
-			     Thread.sleep(150);
+			     Thread.sleep(250);
 			     button.setBackground(buttonColor);
 			 }
 
@@ -96,7 +93,7 @@ public class SimonFlash
 }
 
      private void  lossCheck(int buttonNum) {
-	 userButtonPresses.add(computerButtonPresses.get(currentButton));
+	 //	 userButtonPresses.add(computerButtonPresses.get(currentButton));
 	 placeInSequence++;
 	 boolean didWeLose = false; // initialization just in case for debug
 
@@ -110,12 +107,13 @@ public class SimonFlash
 	 if (currentButton != buttonNum) {
 	     didWeLose = true;
 	     //System.out.println(computerButtonPresses.get(currentButton)
-	 currentButton = computerButtonPresses.get(placeInSequence); 
+	     // if (placeInSequence < computerButtonPresses.size())
+	     //	 currentButton = computerButtonPresses.get(placeInSequence); 
 	     this.endRound(didWeLose); // we lost
 	 }
 	 else if (placeInSequence >= computerButtonPresses.size()) {
 	     //Debug
-	     System.out.println("placeinSequence bigger than computerButtonPresses.size()");
+	     // System.out.println("placeinSequence bigger than computerButtonPresses.size()");
 
 	     didWeLose = false;
 	     this.endRound(didWeLose); // we did *not* lose; game continues

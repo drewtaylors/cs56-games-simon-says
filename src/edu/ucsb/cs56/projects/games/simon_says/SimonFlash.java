@@ -11,14 +11,13 @@ import java.util.*;
 
 public class SimonFlash
  {
-     private ArrayList<Integer> userButtonPresses;
+     private ArrayList<Integer>  userButtonPresses;
      private ArrayList<Integer> computerButtonPresses;
      private SimonButton[] buttons; // order: Green Red, Yellow, Blue
      private int currentButton; 
      private int placeInSequence; // will be zero-based
-     private boolean didWeLose;
 
-     public static void FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
 	 SimonFlash sequence = new SimonFlash(flashes, buttons);
 	 sequence.go();
      }
@@ -47,9 +46,10 @@ public class SimonFlash
 	 this.currentButton = flashes.get(0);
      }
 
+
      /** Flashes in sequential order a sequence of numbers
      */
-     public void go() {
+     private void go() {
 	 try {
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
@@ -79,7 +79,7 @@ public class SimonFlash
      private void  lossCheck(int buttonNum) {
 	 userButtonPresses.add(computerButtonPresses.get(currentButton));
 	 placeInSequence++;
-	 didWeLose = false; // initialization just in case for debug
+	 boolean didWeLose = false; // initialization just in case for debug
 
 	 //debug
 	 System.out.println("current button: "+currentButton);
@@ -89,15 +89,15 @@ public class SimonFlash
 	 if (currentButton != buttonNum) {
 	     didWeLose = true;
 	     //System.out.println(computerButtonPresses.get(currentButton)
-	     currentButton = computerButtonPresses.get(placeInSequence); 
-	     // this.endRound(didWeLose); // we lost
+	 currentButton = computerButtonPresses.get(placeInSequence); 
+	     this.endRound(didWeLose); // we lost
 	 }
 	 else if (placeInSequence >= computerButtonPresses.size()) {
 	     //Debug
 	     System.out.println("placeinSequence bigger than computerButtonPresses.size()");
 
 	     didWeLose = false;
-	     //this.endRound(didWeLose); // we did *not* lose; game continues
+	     this.endRound(didWeLose); // we did *not* lose; game continues
 
 	 }
 	 else if (currentButton == buttonNum) {
@@ -107,8 +107,14 @@ public class SimonFlash
 
      }
 
-     public boolean  endRound() {
-	 return didWeLose;
+     private void endRound(boolean didWeLose) {
+	 if (didWeLose == true) {
+	     System.out.println("You lost! Press start to begin again.");
+	 }
+	 else if (didWeLose == false) {
+	     System.out.println("Success! Onto the next round!");
+	     // initiate new round
+	 }
      }
 
      public class GreenPushListener implements ActionListener {

@@ -126,34 +126,7 @@ public class SimonFrame extends JFrame {
      */
 
     public void startGame() {
-	boolean gameOver = false;
-	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
-	Random rand = new Random(System.currentTimeMillis());
-	boolean didWeLose = false;
 	
-	ArrayList<Integer> buttonPresses = new ArrayList<Integer>();
-
-	while (gameOver == false) {
-	    int ranNum = rand.nextInt(3);
-	    buttonPresses.add(ranNum);
-	    SimonFlash round = new SimonFlash(buttonPresses, button_array);
-	    round.go();
-	    didWeLose = round.endRound();
-	    if (didWeLose == true) {
-	     System.out.println("You lost! Press start to begin again.");
-	     gameOver = true;
-	    }
-	    else if (didWeLose == false) {
-		System.out.println("Success! Onto the next round!");
-		// initiate new round
-	    }
-	    
-
-	}
-	bottomInner.add(startButton); // add button back to screen
-	bottomInner.revalidate();
-	bottomInner.repaint();
-
     }
     public static void main(String[] args) {
 	SimonFrame frame = new SimonFrame();

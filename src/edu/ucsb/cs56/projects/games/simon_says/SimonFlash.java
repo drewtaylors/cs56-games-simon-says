@@ -14,11 +14,12 @@ public class SimonFlash
      private ArrayList<Integer>  userButtonPresses;
      private ArrayList<Integer> computerButtonPresses;
      private SimonButton[] buttons; // order: Green Red, Yellow, Blue
+     private JButton startButton;
      private int currentButton; 
      private int placeInSequence; // will be zero-based
-
-     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons);
+     
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton);
 	 sequence.go();
      }
 
@@ -26,10 +27,14 @@ public class SimonFlash
 	 userButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = new ArrayList<Integer>();
 	 buttons = new SimonButton[4];
+	 for (int i=0; i<4; i++) {
+	     buttons[i] = new SimonButton();
+	 }
+	 startButton = new JButton();
 	 currentButton = 0;
      }
 
-     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons) {
+     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton) {
 	 userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = flashes;
@@ -44,12 +49,13 @@ public class SimonFlash
 	 System.out.println(computerButtonPresses.get(2));
 	 this.buttons = buttons;
 	 this.currentButton = flashes.get(0);
+	 this.startButton = startButton;
      }
 
 
      /** Flashes in sequential order a sequence of numbers
      */
-     private void go() {
+     public void go() {
 	 try {
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
@@ -59,10 +65,14 @@ public class SimonFlash
 		 Thread.sleep(300);
 		 SimonButton button = buttons[button_num]; // for readiblity
 		 
-		 Color buttonColor = button.getBackground();	 
+		 System.out.println("hey"); // DEBUG
+		 Color buttonColor = button.getBackground();
 	         button.setBackground(Color.WHITE);
+
 		 Thread.sleep(150);
 		 button.setBackground(buttonColor);
+		 //button.revalidate(); DEBUG
+		 //button.repaint();
 	     }
 	 } catch (InterruptedException ex) { ex.printStackTrace(); }
 
@@ -74,6 +84,7 @@ public class SimonFlash
 	 buttons[1].addActionListener(new RedPushListener());
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
+	 startButton.addActionListener(new StartPushListener());
      }
 
      private void  lossCheck(int buttonNum) {
@@ -137,5 +148,15 @@ public class SimonFlash
 	     lossCheck(3);
 	 }
      }
+
+     public class StartPushListener implements ActionListener {
+	 public void actionPerformed(ActionEvent ex) {
+	     // bottomInner.remove(startButton); // erase button from screen
+	     // bottomInner.revalidate();
+	     // bottomInner.repaint();
+	     //  startGame();
+	 } 
+     }
+
 } 
 

@@ -74,7 +74,7 @@ public class SimonFrame extends JFrame {
 
 	
 
-	startButton.addActionListener(new StartListener());
+	startButton.addActionListener(new StartListener()); // DEBUG
 
 	// Color all of the background within the border black as well
 	top.setBackground(Color.BLACK);
@@ -86,10 +86,18 @@ public class SimonFrame extends JFrame {
 
     public class StartListener implements ActionListener {
 	public void actionPerformed(ActionEvent ex) {
+	    
 	    bottomInner.remove(startButton); // erase button from screen
 	    bottomInner.revalidate();
 	    bottomInner.repaint();
-	    startGame();
+
+	    new Thread(new Runnable() {
+		    public void run() {
+			startGame();
+		    }
+		}).start();
+	    System.out.println("Thread test"); // DEBUG
+	    
 	}
     }
     /** Method called by main() once all components have been added by frame
@@ -112,14 +120,16 @@ public class SimonFrame extends JFrame {
 	*/
 	// DEBUG
 	//yellowButton.addActionListener(new SimonListener());
+	
+	/* DEBUG
 	ArrayList<Integer> test_array = new ArrayList<Integer>();
 
 	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
 
 	try { Thread.sleep(2000); } catch (InterruptedException ex) { }
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
-	SimonFlash.FlashSequence(test_array, button_array);
-	
+	SimonFlash.FlashSequence(test_array, button_array, startButton);
+	*/
 	// DEBUG redButton.setBackground(Color.WHITE);
     }
     /** A main() method which calls for the frame to be displayed
@@ -127,6 +137,12 @@ public class SimonFrame extends JFrame {
 
     public void startGame() {
 	
+	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
+	ArrayList<Integer> test_array = new ArrayList<Integer>();
+	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
+	SimonFlash flash = new SimonFlash(test_array, button_array, startButton);
+	flash.go();
+	System.out.println("after flash sequence"); // DEBUG
     }
     public static void main(String[] args) {
 	SimonFrame frame = new SimonFrame();

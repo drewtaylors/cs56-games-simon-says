@@ -38,15 +38,15 @@ public class SimonFlash
 	 userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = flashes;
-	 System.out.println(flashes.get(0));
-	 System.out.println(flashes.get(1));
-	 System.out.println(flashes.get(2)+"\n");
+	 // System.out.println(flashes.get(0));
+	 //System.out.println(flashes.get(1));
+	 //System.out.println(flashes.get(2)+"\n");
 
 	 //computerButtonPresses.addAll(flashes);
 	 //Debug
-	 System.out.println(computerButtonPresses.get(0));
-	 System.out.println(computerButtonPresses.get(1));
-	 System.out.println(computerButtonPresses.get(2));
+	 //System.out.println(computerButtonPresses.get(0));
+	 //System.out.println(computerButtonPresses.get(1));
+	 //System.out.println(computerButtonPresses.get(2));
 	 this.buttons = buttons;
 	 this.currentButton = flashes.get(0);
 	 this.startButton = startButton;
@@ -57,43 +57,42 @@ public class SimonFlash
      */
      public void go() {
 
-      
-	 for (SimonButton button : buttons) {
-	     button.setEnabled(false);
-	     //button.removeActionListeners();
-	 }
 	 
 	 new Thread(new Runnable() {
 		 public void run() {
 		     try {
+			 for (SimonButton button : buttons) {
+			     button.setEnabled(false);
+			     ///   button.removeActionListeners();
+			 }
 			 for (int button_num : computerButtonPresses) { // iterate through each sequence element
-			     Thread.sleep(300);
+			     Thread.sleep(400);
 			     SimonButton button = buttons[button_num]; // for readiblity
 			     
-			     System.out.println("hey"); // DEBUG
+			     //System.out.println("hey"); // DEBUG
 			     Color buttonColor = button.getBackground();
 			     button.setBackground(Color.WHITE);
+
 			     
 			     Thread.sleep(150);
 			     button.setBackground(buttonColor);
-			     button.revalidate(); 
-			     button.repaint();
+			 }
+
+			 for (SimonButton button : buttons) { // reactivate buttons
+			     button.setEnabled(true);
 			 }
 		     } catch (InterruptedException ex) {ex.printStackTrace();}
 	     }
 	     }).start();
      
-     for (SimonButton button : buttons) { // reactivate buttons
-	 button.setEnabled(true);
-     }
-     
+     // Change this to 0 later -  DEBUG
      if (computerButtonPresses.size() == 3 ) {
 	 buttons[0].addActionListener(new GreenPushListener()); // listen for inputs
 	 buttons[1].addActionListener(new RedPushListener());
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
 	 startButton.addActionListener(new StartPushListener());
-     }
+	 }
 }
 
      private void  lossCheck(int buttonNum) {
@@ -102,10 +101,12 @@ public class SimonFlash
 	 boolean didWeLose = false; // initialization just in case for debug
 
 	 //debug
+	 /*
 	 System.out.println("current button: "+currentButton);
 	 System.out.println("button number: "+buttonNum);
 	 System.out.println("place in sequence: "+placeInSequence);
 	 System.out.println("size of computerButtonPresses: "+computerButtonPresses.size());
+	 */
 	 if (currentButton != buttonNum) {
 	     didWeLose = true;
 	     //System.out.println(computerButtonPresses.get(currentButton)

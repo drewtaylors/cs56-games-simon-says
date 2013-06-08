@@ -142,7 +142,7 @@ public class SimonFrame extends JFrame {
 	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
 	SimonFlash flash = new SimonFlash(test_array, button_array, startButton);
 	flash.go();
-	System.out.println("after flash sequence"); // DEBUG
+	System.out.println("after flash sequence"); // DEBUG}
     }
     public static void main(String[] args) {
 	SimonFrame frame = new SimonFrame();

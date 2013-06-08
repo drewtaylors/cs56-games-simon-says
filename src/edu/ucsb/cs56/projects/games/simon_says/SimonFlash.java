@@ -56,36 +56,45 @@ public class SimonFlash
      /** Flashes in sequential order a sequence of numbers
      */
      public void go() {
-	 try {
-	     for (SimonButton button : buttons) {
-		 button.setEnabled(false);
-		 button.removeActionListeners();
-	     }
-	     for (int button_num : computerButtonPresses) { // iterate through each sequence element
-		 Thread.sleep(300);
-		 SimonButton button = buttons[button_num]; // for readiblity
-		 
-		 System.out.println("hey"); // DEBUG
-		 Color buttonColor = button.getBackground();
-	         button.setBackground(Color.WHITE);
 
-		 Thread.sleep(150);
-		 button.setBackground(buttonColor);
-		 //button.revalidate(); DEBUG
-		 //button.repaint();
-	     }
-	 } catch (InterruptedException ex) { ex.printStackTrace(); }
-
-	 for (SimonButton button : buttons) { // reactivate buttons
-	     button.setEnabled(true);
+      
+	 for (SimonButton button : buttons) {
+	     button.setEnabled(false);
+	     //button.removeActionListeners();
 	 }
-
+	 
+	 new Thread(new Runnable() {
+		 public void run() {
+		     try {
+			 for (int button_num : computerButtonPresses) { // iterate through each sequence element
+			     Thread.sleep(300);
+			     SimonButton button = buttons[button_num]; // for readiblity
+			     
+			     System.out.println("hey"); // DEBUG
+			     Color buttonColor = button.getBackground();
+			     button.setBackground(Color.WHITE);
+			     
+			     Thread.sleep(150);
+			     button.setBackground(buttonColor);
+			     button.revalidate(); 
+			     button.repaint();
+			 }
+		     } catch (InterruptedException ex) {ex.printStackTrace();}
+	     }
+	     }).start();
+     
+     for (SimonButton button : buttons) { // reactivate buttons
+	 button.setEnabled(true);
+     }
+     
+     if (computerButtonPresses.size() == 3 ) {
 	 buttons[0].addActionListener(new GreenPushListener()); // listen for inputs
 	 buttons[1].addActionListener(new RedPushListener());
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
 	 startButton.addActionListener(new StartPushListener());
      }
+}
 
      private void  lossCheck(int buttonNum) {
 	 userButtonPresses.add(computerButtonPresses.get(currentButton));
@@ -115,7 +124,6 @@ public class SimonFlash
 	     //
 	     currentButton = computerButtonPresses.get(placeInSequence);
 	 }
-
      }
 
      private void endRound(boolean didWeLose) {
@@ -125,7 +133,16 @@ public class SimonFlash
 	 else if (didWeLose == false) {
 	     System.out.println("Success! Onto the next round!");
 	     // initiate new round
+	     Random randomGen = new Random(System.currentTimeMillis());
+	     int randomNum = randomGen.nextInt(4);
+	     computerButtonPresses.add(randomNum);
+	     placeInSequence = 0;
+	     currentButton = computerButtonPresses.get(0);
+	     go();
 	 }
+     }
+     private void nextRound() {
+	 buttons[0].setBackground(Color.GRAY);
      }
 
      public class GreenPushListener implements ActionListener {

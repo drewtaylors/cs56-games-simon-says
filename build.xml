@@ -23,7 +23,7 @@
   </target>
 
   <target name="run" depends="compile" description="run the Simon Says program">
-    <java classname="edu.ucsb.cs56.projects.games.simon_says.SimonFrame" classpath="build" fork="true" />
+    <java classname="edu.ucsb.cs56.projects.games.simon_says.SimonMenu" classpath="build" fork="true" />
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">

@@ -31,11 +31,11 @@ public class SimonFrame extends JFrame {
 	// Filler areas that former border around frame
 	final Dimension fillerSizeVert = new Dimension(0, 30);
 	final Dimension fillerSizeHoriz = new Dimension(30, 30);
+	
 	this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
-	this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));
-        
+	this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));    
 	this.getContentPane().setBackground(Color.BLACK); // color borders of frame black
 
 	// Generate all four the buttons, constructor automatically assigns color and sets preferred size
@@ -45,7 +45,7 @@ public class SimonFrame extends JFrame {
 	this.blueButton = new SimonButton(Color.BLUE);
 
 	// Generate center of frame for buttons
-	 center = new JPanel(new BorderLayout());
+	center = new JPanel(new BorderLayout());
 	this.getContentPane().add(BorderLayout.CENTER, center);
 
 	// Top section of center
@@ -70,8 +70,6 @@ public class SimonFrame extends JFrame {
 	                                                           // of the proper size will remain behind it
 	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //
 
-	
-
 	startButton.addActionListener(new StartListener()); // DEBUG
 
 	// Color all of the background within the border black as well
@@ -81,10 +79,12 @@ public class SimonFrame extends JFrame {
 	bottomInner.setBackground(Color.BLACK);
     }
 
+    
+   
 
     public class StartListener implements ActionListener {
 	public void actionPerformed(ActionEvent ex) {
-	    
+	        
 	    bottomInner.remove(startButton); // erase button from screen
 	    bottomInner.revalidate();
 	    bottomInner.repaint();
@@ -96,8 +96,7 @@ public class SimonFrame extends JFrame {
 			startGame();
 		    }
 		}).start();
-	    System.out.println("Thread test"); // DEBUG
-	    
+	    System.out.println("Thread test"); // DEBUG    
 	}
     }
     /** Method called by main() once all components have been added by frame
@@ -106,29 +105,30 @@ public class SimonFrame extends JFrame {
 
     public void display() {
 	this.setVisible(true);
+	
 	/* DEBUG, remove
-	try {
-	    System.out.println("red");
-	    redButton.doClick(1000);
-	    Thread.sleep(1000);
-	    System.out.println("green");
-	    greenButton.doClick(500);
-	    Thread.sleep(1000);
-	    System.out.println("yellow");
-	    yellowButton.doClick(1000);
-	} catch (InterruptedException ex) { }
+	   try {
+	       System.out.println("red");
+	           redButton.doClick(1000);
+		       Thread.sleep(1000);
+		           System.out.println("green");
+			       greenButton.doClick(500);
+			           Thread.sleep(1000);
+				       System.out.println("yellow");
+				           yellowButton.doClick(1000);
+					   } catch (InterruptedException ex) { }
 	*/
 	// DEBUG
 	//yellowButton.addActionListener(new SimonListener());
 	
 	/* DEBUG
-	ArrayList<Integer> test_array = new ArrayList<Integer>();
+	   ArrayList<Integer> test_array = new ArrayList<Integer>();
 
-	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
+	   test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
 
-	try { Thread.sleep(2000); } catch (InterruptedException ex) { }
-	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
-	SimonFlash.FlashSequence(test_array, button_array, startButton);
+	   try { Thread.sleep(2000); } catch (InterruptedException ex) { }
+	   SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
+	   SimonFlash.FlashSequence(test_array, button_array, startButton);
 	*/
 	// DEBUG redButton.setBackground(Color.WHITE);
     }
@@ -143,7 +143,7 @@ public class SimonFrame extends JFrame {
 	
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
 	//ArrayList<Integer> test_array = new ArrayList<Integer>();
-	//	test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
+	//test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
 	test_array.add(randomNum2); // one element to start off with
@@ -151,9 +151,6 @@ public class SimonFrame extends JFrame {
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }
-    public static void main(String[] args) {
-	SimonFrame frame = new SimonFrame();
-	frame.display();
- 
-    }
+    
+  
 }

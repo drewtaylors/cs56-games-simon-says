@@ -8,7 +8,7 @@ public class SimonLevel extends JFrame{
 	
 	 private JPanel mp;
 	 private ActionListener al;
-	 private final String Level[] = {"Challenge", "Speed Up", "General"};
+	 private final String Level[] = {"Professional", "Intermediate", "Amateur"};
 	    
 	   
 	 public SimonLevel()
@@ -45,11 +45,18 @@ public class SimonLevel extends JFrame{
 	    public class LevelListener implements ActionListener{
 		public void actionPerformed(ActionEvent ex) {
 		    String cmd = ex.getActionCommand();
-		    if(cmd.equals("General")){
+		    if(cmd.equals("Amateur")){
 			dispose();
 			SimonFrame frame = new SimonFrame();
 			frame.display();
 		    }
+		    else if(cmd.equals("Intermediate")){
+		    	dispose();
+		    	SimonInterLF inter=new SimonInterLF();
+		    	inter.setVisible(true);
+		    }
+		    
+		    
 		}
 	    }
 

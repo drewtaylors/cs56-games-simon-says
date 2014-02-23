@@ -7,10 +7,9 @@ import javax.swing.*;
 
 public class SimonMenu extends JFrame
 {
-    private Image background;
+    
     private JPanel mp;
     private ActionListener al;
-    private Box b;
     private final String MENU[] = {"New Game", "Choose Version", "Rules", "Exit"};
     
    

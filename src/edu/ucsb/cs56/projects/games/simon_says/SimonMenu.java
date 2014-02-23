@@ -47,10 +47,15 @@ public class SimonMenu extends JFrame
 	public void actionPerformed(ActionEvent ex) {
 	    String cmd = ex.getActionCommand();
 	    if(cmd.equals("New Game")){
-		dispose();
-		SimonFrame frame = new SimonFrame();
-		frame.display();
+	    	dispose();
+	    	SimonFrame frame = new SimonFrame();
+	    	frame.display();
 	    }
+	    else if(cmd.equals("Choose Version")){
+			dispose();
+			SimonLevel level = new SimonLevel();
+	    }
+	    
 	}
     }
     

@@ -1,5 +1,7 @@
 package edu.ucsb.cs56.projects.games.simon_says;
 
+import edu.ucsb.cs56.projects.games.simon_says.edu.ucsb.cs56.projects.games.simon_says.model.SimonSaysGame;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -137,18 +139,16 @@ public class SimonFrame extends JFrame {
 
     public void startGame() {
 
-	Random randomGen = new Random(System.currentTimeMillis());
-	int randomNum = randomGen.nextInt(4);
-	int randomNum2 = (int)( Math.random() * 3.9999999); 
+	int randomNum = (int)( Math.random() * 3.9999999);
 	
 	SimonButton button_array[] = {greenButton, redButton, yellowButton, blueButton};
 	//ArrayList<Integer> test_array = new ArrayList<Integer>();
 	//test_array.add(2); test_array.add(0); test_array.add(0); // Ugly, but just for testing 
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
-	test_array.add(randomNum2); // one element to start off with
-	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, bottomInner);
-	flash.go();
+	test_array.add(randomNum); // one element to start off with
+	SimonSaysGame theGame = new SimonSaysGame(test_array, button_array, startButton, bottomInner);
+	theGame.startTurn();
 	System.out.println("after flash sequence"); // DEBUG}
     }
     

@@ -1,11 +1,13 @@
 package edu.ucsb.cs56.projects.games.simon_says.edu.ucsb.cs56.projects.games.simon_says.model;
 
 import edu.ucsb.cs56.projects.games.simon_says.SimonButton;
-import edu.ucsb.cs56.projects.games.simon_says.SimonFlash;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Administrator on 14-2-23.
@@ -39,6 +41,8 @@ public class SimonSaysGame {
 //        currentButton = 0;
 //    }
 
+
+
     public SimonSaysGame(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JComponent startButtonLocation) {
         //userButtonPresses = new ArrayList<Integer>();
         //	 this.computerButtonPresses = new ArrayList<Integer>();
@@ -59,11 +63,12 @@ public class SimonSaysGame {
     }
 
 
-
-
-
-    public ArrayList getCurrentSequence(){
+    public ArrayList<Integer> getCurrentSequence(){
         return computerButtonPresses;
+    }
+
+    public boolean sequenceComplete(){
+        return (placeInSequence >= getCurrentSequence().size());
     }
 
     public int getSequenceLength(){
@@ -81,7 +86,7 @@ public class SimonSaysGame {
                         button.setEnabled(false);
                         ///   button.removeActionListeners();
                     }
-                    for (int button_num : computerButtonPresses) { // iterate through each sequence element
+                    for (int button_num : getCurrentSequence()) { // iterate through each sequence element
                         Thread.sleep(500);
                         SimonButton button = buttons[button_num]; // for readiblity
                         //System.out.println("hey"); // DEBUG
@@ -99,7 +104,7 @@ public class SimonSaysGame {
         }).start();
 
         // Change this to 1 later -  DEBUG
-        if (computerButtonPresses.size() == 1 ) {
+        if (getCurrentSequence().size() == 1 ) {
             buttons[0].addActionListener(new SimonSaysGame.GreenPushListener()); // listen for inputs
             buttons[1].addActionListener(new SimonSaysGame.RedPushListener());
             buttons[2].addActionListener(new SimonSaysGame.YellowPushListener());
@@ -107,37 +112,110 @@ public class SimonSaysGame {
             startButton.addActionListener(new SimonSaysGame.StartPushListener());
         }
         }
+
+    public void checkLoss(int buttonNum){
+        placeInSequence++;
+        System.out.println("current button: "+currentButton);
+        System.out.println("button number: "+buttonNum);
+        System.out.println("length of sequence guessed: "+getSequenceLength());
+        System.out.println("size of computerButtonPresses: "+getCurrentSequence().size());
+        if (guessNextColor(buttonNum)){
+            this.endTurn(false); // we did *not* lose; game continues
+        }
+        else {
+            this.endTurn(true); // we lost
+        }
+
     }
 
 
     public boolean guessNextColor(int buttonNum){
-        placeInSequence++;
-        boolean didWeLose;
-        //debug
-
-        System.out.println("current button: "+currentButton);
-        System.out.println("button number: "+buttonNum);
-        System.out.println("length of sequence guessed: "+getSequenceLength());
-        System.out.println("size of computerButtonPresses: "+computerButtonPresses.size());
-
+        boolean canIGuessTheNextColor=false;
         if (currentButton != buttonNum) {
-            didWeLose = true;
+            canIGuessTheNextColor = false;
+        }
 
-            this.endTurn(didWeLose); // we lost
+        else if (sequenceComplete()) {
+            canIGuessTheNextColor = true;
         }
-        else if (placeInSequence >= computerButtonPresses.size()) {
-            //Debug
-            // System.out.println("placeinSequence bigger than computerButtonPresses.size()");
-            didWeLose = false;
-            this.endRound(didWeLose); // we did *not* lose; game continues
-        }
+
         else if (currentButton == buttonNum) {
-            //
-            currentButton = computerButtonPresses.get(placeInSequence);
+            currentButton = getCurrentSequence().get(placeInSequence);
         }
 
+        return canIGuessTheNextColor;
 
     }
 
 
+    public void endTurn(boolean didWeLose){
+        if (didWeLose) {
+            for (SimonButton button : buttons) {
+                button.setEnabled(false);
+                button.removeActionListeners();
+                System.out.println("set buttons enabled false"); // DEBUG
+            }
+            System.out.println("You lost! Press start to begin again.");
+
+            placeInSequence = 0;
+            //Random randomGen = new Random(System.currentTimeMillis());
+            //int randomNum = randomGen.nextInt(4);
+            int randomNum2 = (int)( Math.random() * 3.9999999);
+            computerButtonPresses = new ArrayList<Integer>();
+            computerButtonPresses.add(randomNum2);
+            currentButton = computerButtonPresses.get(0);
+
+            startButtonLocation.add(startButton); // add button back to screen
+            startButtonLocation.revalidate();
+            startButtonLocation.repaint();
+        }
+
+        else if (didWeLose == false) {
+            System.out.println("Success! Onto the next round!");
+            // initiate new round
+//            Random randomGen = new Random(System.currentTimeMillis());
+//            int randomNum = randomGen.nextInt(4);
+            int randomNum2 = (int)( Math.random() * 3.9999999);
+            computerButtonPresses.add(randomNum2);
+            placeInSequence = 0;
+            currentButton = computerButtonPresses.get(0);
+            startTurn();
+        }
+    }
+
+    public class GreenPushListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            checkLoss(0);
+        }
+    }
+    public class RedPushListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            checkLoss(1);
+        }
+    }
+    public class YellowPushListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            checkLoss(2);
+        }
+    }
+    public class BluePushListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            checkLoss(3);
+        }
+    }
+
+    public class StartPushListener implements ActionListener {
+        public void actionPerformed(ActionEvent ex) {
+            startButtonLocation.remove(startButton); // erase button from screen
+            startButtonLocation.revalidate();
+            startButtonLocation.repaint();
+            startTurn();
+        }
+    }
+
+
 }
+
+
+
+

@@ -55,6 +55,11 @@ public class SimonLevel extends JFrame{
 		    	SimonInterLF inter=new SimonInterLF();
 		    	inter.setVisible(true);
 		    }
+		    else if(cmd.equals("Professional")){
+		    	dispose();
+		    	SimonProL pro=new SimonProL();
+		    	pro.setVisible(true);
+		    }
 		    
 		    
 		}

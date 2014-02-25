@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.games.simon_says.edu.ucsb.cs56.projects.games.simon_says.model;
+package edu.ucsb.cs56.projects.games.simon_says.model;
 
 import edu.ucsb.cs56.projects.games.simon_says.SimonButton;
 
@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Administrator on 14-2-23.
@@ -20,10 +19,10 @@ public class SimonSaysGame {
     private JComponent startButtonLocation;
     private int currentButton;
     private int placeInSequence; // will be zero-based
-    private int greenInt = 0;
-    private int redInt = 1;
-    private int yellowInt= 2;
-    private int blueInt =3;
+//    private int greenInt = 0;
+//    private int redInt = 1;
+//    private int yellowInt= 2;
+//    private int blueInt =3;
 
 
 //    public SimonSaysGame(){

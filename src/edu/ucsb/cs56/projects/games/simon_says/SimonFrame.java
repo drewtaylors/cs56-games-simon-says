@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.simon_says;
 
-import edu.ucsb.cs56.projects.games.simon_says.edu.ucsb.cs56.projects.games.simon_says.model.SimonSaysGame;
+
+import edu.ucsb.cs56.projects.games.simon_says.model.SimonSaysGame;
 
 import java.awt.*;
 import javax.swing.*;

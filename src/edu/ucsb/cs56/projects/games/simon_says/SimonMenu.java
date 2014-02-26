@@ -53,7 +53,7 @@ public class SimonMenu extends JFrame
 	    }
 	    else if(cmd.equals("Choose Version")){
 			dispose();
-			SimonLevel level = new SimonLevel();
+			new SimonLevel();
 	    }
 	    
 	}

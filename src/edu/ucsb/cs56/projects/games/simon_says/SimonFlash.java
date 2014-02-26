@@ -15,12 +15,13 @@ public class SimonFlash
      private ArrayList<Integer> computerButtonPresses;
      private SimonButton[] buttons; // order: Green Red, Yellow, Blue
      private JButton startButton;
+     private JButton returnButton;
      private JComponent startButtonLocation;
      private int currentButton; 
      private int placeInSequence; // will be zero-based
      
-     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JComponent startButtonLocation) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, startButtonLocation);
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation);
 	 sequence.go();
      }
 
@@ -32,11 +33,12 @@ public class SimonFlash
 	     buttons[i] = new SimonButton();
 	 }
 	 startButton = new JButton();
+     returnButton = new JButton();
 	 startButtonLocation = new JPanel();
 	 currentButton = 0;
      }
 
-     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JComponent startButtonLocation) {
+     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
 	 //userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = flashes;
@@ -52,6 +54,7 @@ public class SimonFlash
 	 this.buttons = buttons;
 	 this.currentButton = flashes.get(0);
 	 this.startButton = startButton;
+     this.returnButton = returnButton;
 	 this.startButtonLocation = startButtonLocation;
      }
 
@@ -92,6 +95,7 @@ public class SimonFlash
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
 	 startButton.addActionListener(new StartPushListener());
+    // returnButton.addActionListener(new ExitPushListener());
 	 }
 }
 
@@ -189,6 +193,8 @@ public class SimonFlash
 	      go();
 	 } 
      }
+
+
 
 } 
 

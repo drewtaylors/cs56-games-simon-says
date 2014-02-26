@@ -15,6 +15,7 @@ public class SimonFrame extends JFrame {
     SimonButton yellowButton;
     SimonButton blueButton;
     JButton startButton;
+    JButton returnButton;
 
     JPanel center;
     JPanel top;
@@ -64,13 +65,16 @@ public class SimonFrame extends JFrame {
 
 	// Add Start button to bottom to Filler area
 	startButton = new JButton("Start");
+    returnButton = new JButton("Exit");
 	bottomInner = new JPanel(); // Create a panel to put button so button doesn't span whole border
 	bottomInner.add(startButton);
+    bottomInner.add(returnButton);
 	this.bottomInner.add(Box.createRigidArea(fillerSizeVert)); // Makes sure that when button is deleted, the filler area
 	                                                           // of the proper size will remain behind it
 	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //
 
 	startButton.addActionListener(new StartListener()); // DEBUG
+    returnButton.addActionListener(new ExitListener());
 
 	// Color all of the background within the border black as well
 	top.setBackground(Color.BLACK);
@@ -86,10 +90,12 @@ public class SimonFrame extends JFrame {
 	public void actionPerformed(ActionEvent ex) {
 	        
 	    bottomInner.remove(startButton); // erase button from screen
+
 	    bottomInner.revalidate();
 	    bottomInner.repaint();
 
 	    startButton.removeActionListener(this);
+
 
 	    new Thread(new Runnable() {
 		    public void run() {
@@ -102,6 +108,14 @@ public class SimonFrame extends JFrame {
     /** Method called by main() once all components have been added by frame
      *  to display the frame.
      */
+
+    public class ExitListener implements ActionListener {
+        public void actionPerformed(ActionEvent ex){
+            dispose();
+            new SimonMenu();
+
+        }
+    }
 
     public void display() {
 	this.setVisible(true);
@@ -147,7 +161,7 @@ public class SimonFrame extends JFrame {
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
 	test_array.add(randomNum2); // one element to start off with
-	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, bottomInner);
+	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, returnButton, bottomInner);
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }

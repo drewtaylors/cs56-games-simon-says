@@ -12,12 +12,13 @@ public class SimonInterL{
     private ArrayList<Integer> computerButtonPresses;
     private SimonButton[] buttons; // order: Green Red, Yellow, Blue
     private JButton startButton;
+    private JButton returnButton;
     private JComponent startButtonLocation;
     private int currentButton; 
     private int placeInSequence; // will be zero-based
     
-    public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JComponent startButtonLocation) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, startButtonLocation);
+    public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton,startButtonLocation);
 	 sequence.go();
     }
 
@@ -28,15 +29,17 @@ public class SimonInterL{
    	 		buttons[i] = new SimonButton();
    	 	}
    	 	startButton = new JButton();
+        returnButton = new JButton();
    	 	startButtonLocation = new JPanel();
    	 	currentButton = 0;
     }
 
-    public SimonInterL(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JComponent startButtonLocation) {
+    public SimonInterL(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
     	computerButtonPresses = flashes;
     	this.buttons = buttons;
    	 	this.currentButton = flashes.get(0);
    	 	this.startButton = startButton;
+        this.returnButton = returnButton;
    	 	this.startButtonLocation = startButtonLocation;
     }
 

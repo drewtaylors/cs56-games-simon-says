@@ -25,7 +25,9 @@ public class SimonInterLF extends SimonFrame {
 		
 		ArrayList<Integer> test_array =  new ArrayList<Integer>();
 		test_array.add(randomNum2); // one element to start off with
-		SimonInterL flash = new SimonInterL(test_array, button_array, startButton, bottomInner);
+		SimonInterL flash = new SimonInterL(test_array, button_array, startButton,returnButton, bottomInner);
+
+
 		flash.go();
 		System.out.println("after flash sequence"); // DEBUG}
 	    }

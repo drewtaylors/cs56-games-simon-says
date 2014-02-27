@@ -213,7 +213,7 @@ public class SimonSaysTest {
         assertEquals(0,g.getComputerPresses().size());
         //check whether placeInSequence is reset to 0 through calling endTurn()
         assertEquals(0,g.getPlaceInSequence());
-        //check whether currentCorrectButton is reset to NULL through calling endTurn()
+        //check whether currentCorrectButton is reset to -1 through calling endTurn()
         assertEquals(-1,g.getCurrentCorrectButton());
     }
 

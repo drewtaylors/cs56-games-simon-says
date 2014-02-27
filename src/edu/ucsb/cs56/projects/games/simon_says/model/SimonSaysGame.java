@@ -3,9 +3,13 @@ package edu.ucsb.cs56.projects.games.simon_says.model;
 import java.util.ArrayList;
 
 public class SimonSaysGame {
-    private ArrayList<Integer> computerPresses;//representing color
-    private int currentCorrectButton;//recording the correct button at certain time in the sequence
-    private int placeInSequence;//recording player's position in the sequence
+
+    private ArrayList<Integer> computerPresses;//represents color
+    private int currentCorrectButton;//records the correct button at certain time in the sequence
+    private int placeInSequence;//records player's position in the sequence
+    public boolean amIRightOnTheCurrent;//keeps track of whether the player is correct on the current number in the sequence
+    public boolean amIRightOnTheNext;//keeps track of whether the player is correct on the next number in the sequence
+
 
     // no-arg constructor initialize computer presses with 1 random number
     public SimonSaysGame(){
@@ -90,19 +94,50 @@ public class SimonSaysGame {
 
 
     // returns 1 if the game is over
-    public int startTurn(int guessNum){
+    // should only be called to start a new game
+    public int startTurn(ArrayList<Integer> guessNumAry){
         while(true){
-            //create a variable to store the boolean value of guessNextColor
-            //and call guessNextColor to make corresponding changes to instance variables
-            boolean amIRight = guessNextColor(guessNum);
 
-            if(!amIRight){
+            int currentGuess = guessNumAry.get(0);
+
+            //if there's only one element in the guessNumAry, just check that one
+            if(guessNumAry.size()==1){
+                if (currentCorrectButton == guessNumAry.get(0))
+                    amIRightOnTheCurrent = true;
                 endTurn();
                 return 1;
             }
-            else if(sequenceComplete())
-                endTurn();
-                return 1;
+
+            //then there's more than one element in the guessNumAry
+            else {
+                //get the next guess
+                int nextGuess = guessNumAry.get(1);
+
+                //check current guess
+                if(currentCorrectButton == currentGuess){
+                    //correct, go to the next one
+                    amIRightOnTheCurrent = true;
+                    amIRightOnTheNext = guessNextColor(nextGuess);
+                    //if next guess is wrong OR the player has completed the sequence
+                    if(!amIRightOnTheNext || sequenceComplete()){
+                        endTurn();
+                        return 1;
+                    }
+
+                }
+
+                else{
+                    endTurn();
+                    return 1;
+                }
+            }
+
+            //delete the first two guesses that we just checked
+            guessNumAry.remove(0);
+            guessNumAry.remove(1);
+            amIRightOnTheCurrent = false;
+            amIRightOnTheNext = false;
+
         }
 
     }

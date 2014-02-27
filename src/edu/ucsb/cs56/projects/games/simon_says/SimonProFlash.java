@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 
 public class SimonProFlash {
@@ -16,6 +18,7 @@ public class SimonProFlash {
     private int placeInSequence; // will be zero-based
     private JLabel score;
     private int Score=0;
+    private  int highScore=0;
 
     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
         SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation,score);
@@ -158,6 +161,45 @@ public class SimonProFlash {
             System.out.println("Success! Onto the next round!");
             Score++;
             score.setText("Score: "+Score+"  ");
+
+            try{
+                File myFile = new File("HighScoreProLevel.txt");
+                FileReader fileReader = new FileReader(myFile);
+                BufferedReader reader = new BufferedReader(fileReader);
+                String line;
+                String l=null;
+                while((line=reader.readLine())!=null) {
+                    l=line;
+                }
+                String[] HighestScore = l.split(": ");
+                String s=null;
+                for(String token:HighestScore){
+                    s=token;
+                }
+                highScore= Integer.parseInt(String.valueOf(s));
+                reader.close();
+
+                if(highScore<Score){
+                    try{
+                        FileWriter writer = new FileWriter("HighScoreProLevel.txt");
+                        writer.write("Highest Score: "+ Score);
+                        writer.close();
+                    }catch(IOException ex){
+                        ex.printStackTrace();
+                    }
+                }
+            }catch (IOException ex){
+                try{
+                    FileWriter writer = new FileWriter("HighScoreProLevel.txt");
+                    writer.write("Highest Score: "+ Score);
+                    writer.close();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+
+            }
+
+
             // initiate new round
             Random randomGen = new Random(System.currentTimeMillis());
             int randomNum = randomGen.nextInt(4);

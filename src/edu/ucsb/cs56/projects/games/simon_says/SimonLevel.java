@@ -15,15 +15,7 @@ public class SimonLevel extends JFrame{
      {
 	    super("Simon");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        
-	    try
-	    {
-	       	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	    }
-        catch(Exception ex)
-	    {
-        	
-	    }
+
 	    mp = new JPanel();
 	    mp.setBackground(Color.BLACK);
 	    mp.setLayout(null);

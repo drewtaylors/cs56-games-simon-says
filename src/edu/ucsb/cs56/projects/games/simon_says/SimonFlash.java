@@ -19,9 +19,11 @@ public class SimonFlash
      private JComponent startButtonLocation;
      private int currentButton; 
      private int placeInSequence; // will be zero-based
+     private JLabel score;
+     private int Score=0;
      
-     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation);
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation,score);
 	 sequence.go();
      }
 
@@ -34,11 +36,13 @@ public class SimonFlash
 	 }
 	 startButton = new JButton();
      returnButton = new JButton();
+     score = new JLabel("Score: 0  ");
+
 	 startButtonLocation = new JPanel();
 	 currentButton = 0;
      }
 
-     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
+     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
 	 //userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = flashes;
@@ -55,6 +59,7 @@ public class SimonFlash
 	 this.currentButton = flashes.get(0);
 	 this.startButton = startButton;
      this.returnButton = returnButton;
+     this.score = score;
 	 this.startButtonLocation = startButtonLocation;
      }
 
@@ -150,9 +155,12 @@ public class SimonFlash
 	     startButtonLocation.add(startButton); // add button back to screen
 	     startButtonLocation.revalidate();
 	     startButtonLocation.repaint();
-	 }
+
+     }
 	 else if (didWeLose == false) {
 	     System.out.println("Success! Onto the next round!");
+         Score++;
+         score.setText("Score: "+Score+"  ");
 	     // initiate new round
 	     Random randomGen = new Random(System.currentTimeMillis());
 	     int randomNum = randomGen.nextInt(4);
@@ -190,6 +198,8 @@ public class SimonFlash
 	      startButtonLocation.remove(startButton); // erase button from screen
 	      startButtonLocation.revalidate();
 	      startButtonLocation.repaint();
+          score.setText("Score: 0  ");
+          Score = 0;
 	      go();
 	 } 
      }

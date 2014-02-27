@@ -16,9 +16,11 @@ public class SimonInterL{
     private JComponent startButtonLocation;
     private int currentButton; 
     private int placeInSequence; // will be zero-based
+    private JLabel score;
+    private int Score=0;
     
-    public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton,startButtonLocation);
+    public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton,startButtonLocation,score);
 	 sequence.go();
     }
 
@@ -30,16 +32,18 @@ public class SimonInterL{
    	 	}
    	 	startButton = new JButton();
         returnButton = new JButton();
+        score = new JLabel("Score: 0  ");
    	 	startButtonLocation = new JPanel();
    	 	currentButton = 0;
     }
 
-    public SimonInterL(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation) {
+    public SimonInterL(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
     	computerButtonPresses = flashes;
     	this.buttons = buttons;
    	 	this.currentButton = flashes.get(0);
    	 	this.startButton = startButton;
         this.returnButton = returnButton;
+        this.score = score;
    	 	this.startButtonLocation = startButtonLocation;
     }
 
@@ -135,6 +139,8 @@ public class SimonInterL{
 	 else if (didWeLose == false) {
 	     System.out.println("Success! Onto the next round!");
 	     // initiate new round
+         Score++;
+         score.setText("Score: "+Score+"  ");
 	     Random randomGen = new Random(System.currentTimeMillis());
 	     int randomNum = randomGen.nextInt(4);
 	     int randomNum2 = (int)( Math.random() * 3.9999999); 
@@ -171,6 +177,8 @@ public class SimonInterL{
 	      startButtonLocation.remove(startButton); // erase button from screen
 	      startButtonLocation.revalidate();
 	      startButtonLocation.repaint();
+          score.setText("Score: 0  ");
+          Score = 0;
 	      go();
 	 } 
     }	

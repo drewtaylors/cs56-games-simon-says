@@ -33,6 +33,8 @@ public class SimonMenu extends JFrame
 	    {
 		JButton jb = new JButton(MENU[i]);
 		jb.setBackground(new Color(0xCC99FF));
+
+     /*************************/
 		jb.setBorderPainted(false);
 		jb.setOpaque(true);
 		jb.addActionListener(new MenuListener());

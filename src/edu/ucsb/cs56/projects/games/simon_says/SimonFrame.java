@@ -16,11 +16,13 @@ public class SimonFrame extends JFrame {
     SimonButton blueButton;
     JButton startButton;
     JButton returnButton;
+    JLabel  score;
 
     JPanel center;
     JPanel top;
     JPanel bottom;
     JPanel bottomInner;
+    JPanel topInner;
 
     /** No-arg frame constructor, sets up frame and layout of panels and components
      */
@@ -76,11 +78,21 @@ public class SimonFrame extends JFrame {
 	startButton.addActionListener(new StartListener()); // DEBUG
     returnButton.addActionListener(new ExitListener());
 
+    score = new JLabel("Score: 0  ");
+    score.setForeground(Color.WHITE);
+    topInner = new JPanel(new BorderLayout());
+
+    topInner.add(BorderLayout.EAST,score);
+    this.topInner.add(Box.createRigidArea(fillerSizeVert));
+    this.getContentPane().add(BorderLayout.NORTH, topInner);
+
 	// Color all of the background within the border black as well
 	top.setBackground(Color.BLACK);
 	bottom.setBackground(Color.BLACK);
 	center.setBackground(Color.BLACK);
 	bottomInner.setBackground(Color.BLACK);
+    topInner.setBackground(Color.BLACK);
+
     }
 
     
@@ -161,7 +173,7 @@ public class SimonFrame extends JFrame {
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
 	test_array.add(randomNum2); // one element to start off with
-	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, returnButton, bottomInner);
+	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, returnButton, bottomInner, score);
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }

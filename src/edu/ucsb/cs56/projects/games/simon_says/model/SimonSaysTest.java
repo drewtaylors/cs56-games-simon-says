@@ -57,7 +57,7 @@ public class SimonSaysTest {
     public void test_getSequenceLength_1() {
 
         SimonSaysGame g = new SimonSaysGame();
-        assertEquals(0,g.getSequenceLength());
+        assertEquals(1,g.getSequenceLength());
     }
 
 
@@ -113,7 +113,7 @@ public class SimonSaysTest {
 
 
     @Test
-    //^1 If the player's guess is correct
+    //^1 If the player's guess for the next number is correct
     public void test_guessNextColor_1() {
         //initial flash sequence is [2,0,1,0]
         ArrayList<Integer> sequence = new ArrayList<Integer>();
@@ -122,7 +122,7 @@ public class SimonSaysTest {
 
         SimonSaysGame g = new SimonSaysGame(sequence,placeInSequence);
         //check whether it returns correct boolean value
-        assertEquals(true,g.guessNextColor(2));
+        assertEquals(true,g.guessNextColor(0));
         //check whether placeInSequence is incremented
         assertEquals(1,g.getPlaceInSequence());
         //check whether currentCorrectButton is updated
@@ -131,7 +131,7 @@ public class SimonSaysTest {
     }
 
     @Test
-    //^2 If the player's guess is incorrect
+    //^2 If the player's guess for the next number is incorrect
     public void test_guessNextColor_2() {
         //initial flash sequence is [2,0,1,0]
         ArrayList<Integer> sequence = new ArrayList<Integer>();
@@ -168,8 +168,8 @@ public class SimonSaysTest {
         assertEquals(0,g.getComputerPresses().size());
         //check whether placeInSequence is reset to 0 through calling endTurn()
         assertEquals(0,g.getPlaceInSequence());
-        //check whether currentCorrectButton is reset to NULL through calling endTurn()
-        assertEquals(null,g.getCurrentCorrectButton());
+        //check whether currentCorrectButton is reset to -1 through calling endTurn()
+        assertEquals(-1,g.getCurrentCorrectButton());
     }
 
     @Test
@@ -182,7 +182,7 @@ public class SimonSaysTest {
         int placeInSequence = 0;
         //guess array is [2,0,1,0], which is correct
         ArrayList<Integer> guessAry = new ArrayList<Integer>();
-        sequence.add(2);sequence.add(0);sequence.add(1);sequence.add(0);
+        guessAry.add(2);guessAry.add(0);guessAry.add(1);guessAry.add(0);
 
 
 
@@ -193,8 +193,8 @@ public class SimonSaysTest {
         assertEquals(0,g.getComputerPresses().size());
         //check whether placeInSequence is reset to 0 through calling endTurn()
         assertEquals(0,g.getPlaceInSequence());
-        //check whether currentCorrectButton is reset to NULL through calling endTurn()
-        assertEquals(null,g.getCurrentCorrectButton());
+        //check whether currentCorrectButton is reset to -1 through calling endTurn()
+        assertEquals(-1,g.getCurrentCorrectButton());
     }
 
 
@@ -214,7 +214,7 @@ public class SimonSaysTest {
         //check whether placeInSequence is reset to 0 through calling endTurn()
         assertEquals(0,g.getPlaceInSequence());
         //check whether currentCorrectButton is reset to NULL through calling endTurn()
-        assertEquals(null,g.getCurrentCorrectButton());
+        assertEquals(-1,g.getCurrentCorrectButton());
     }
 
 

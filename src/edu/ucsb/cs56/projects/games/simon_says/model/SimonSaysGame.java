@@ -108,7 +108,7 @@ public class SimonSaysGame {
                 return 1;
             }
 
-            //then there's more than one element in the guessNumAry
+            //if there's more than one element in the guessNumAry
             else {
                 //get the next guess
                 int nextGuess = guessNumAry.get(1);
@@ -147,7 +147,8 @@ public class SimonSaysGame {
         //reset all the instance variables
         computerPresses.clear();
         placeInSequence = 0;
-        currentCorrectButton = computerPresses.get(0);
+        //currentCorrectButton sets to -1 to indicate that the sequence is empty
+        currentCorrectButton = -1;
     }
 
 

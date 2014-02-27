@@ -252,6 +252,7 @@ public class SimonProFlash {
             startButtonLocation.repaint();
             score.setText("Score: 0  ");
             Score = 0;
+            score.setForeground(Color.WHITE);
             go();
         }
     }

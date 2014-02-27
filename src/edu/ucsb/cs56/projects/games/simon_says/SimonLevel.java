@@ -5,21 +5,22 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class SimonLevel extends JFrame{
-	
+
 	 private JPanel mp;
 	 private ActionListener al;
 	 private final String Level[] = {"Professional", "Intermediate", "Amateur"};
-	    
-	   
+
+
 	 public SimonLevel()
      {
 	    super("Simon");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    
 	    mp = new JPanel();
 	    mp.setBackground(Color.BLACK);
 	    mp.setLayout(null);
-	             
+
         getContentPane().add(BorderLayout.CENTER, mp);
 	    for(int i = 0; i < Level.length; i++){
 	    	JButton jb = new JButton(Level[i]);
@@ -33,7 +34,7 @@ public class SimonLevel extends JFrame{
 	        setSize(300, 300);
 	        setVisible(true);
 	    }
-	      
+
 	    public class LevelListener implements ActionListener{
 		public void actionPerformed(ActionEvent ex) {
 		    String cmd = ex.getActionCommand();
@@ -52,8 +53,8 @@ public class SimonLevel extends JFrame{
 		    	SimonProL pro=new SimonProL();
 		    	pro.setVisible(true);
 		    }
-		    
-		    
+
+
 		}
 	    }
 

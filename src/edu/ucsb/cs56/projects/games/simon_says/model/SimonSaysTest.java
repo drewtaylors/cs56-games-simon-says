@@ -57,6 +57,7 @@ public class SimonSaysTest {
     public void test_getSequenceLength_1() {
 
         SimonSaysGame g = new SimonSaysGame();
+        //no-arg constructor initializes the sequence with only 1 random number
         assertEquals(1,g.getSequenceLength());
     }
 

@@ -17,13 +17,7 @@ public class SimonMenu extends JFrame
     {
         super("Simon");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        try
-	    {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	    }
-        catch(Exception ex)
-	    {
-	    }
+	
         mp = new JPanel();
         mp.setBackground(Color.BLACK);
         mp.setLayout(null);
@@ -62,14 +56,6 @@ public class SimonMenu extends JFrame
     }
     
     public static void main(String[] args) {
-	SwingUtilities.invokeLater(new Runnable(){
-
-		public void run()
-		{
-		    new SimonMenu().setVisible(true);
-		}
-
-	    });
-    
+	new SimonMenu().setVisible(true);   
     }    
 }

@@ -17,10 +17,18 @@ public class SimonSaysGame {
     }
 
     //constructor with arguments to initialize all the instance variables
-    public SimonSaysGame(ArrayList<Integer> flashSequence, int tmpCurrentCorrectButton,int tmpPlaceInSequence){
-        computerPresses = flashSequence;
-        currentCorrectButton = tmpCurrentCorrectButton;
-        placeInSequence = tmpPlaceInSequence;
+    public SimonSaysGame(ArrayList<Integer> flashSequence,int tmpPlaceInSequence){
+        //if the input placeInSequence is greater than the size of the sequence,initialize to the last one
+        if (tmpPlaceInSequence>(flashSequence.size()-1)){
+            computerPresses = flashSequence;
+            currentCorrectButton = flashSequence.get(flashSequence.size()-1);
+            placeInSequence = (flashSequence.size()-1);
+        }
+        else {
+            computerPresses = flashSequence;
+            currentCorrectButton = flashSequence.get(tmpPlaceInSequence);
+            placeInSequence = tmpPlaceInSequence;
+        }
     }
 
     // Create all the getters
@@ -65,7 +73,7 @@ public class SimonSaysGame {
 
 
     //guess the next color and it returns a boolean value indicating whether the guess is correct
-    public boolean guessNextColor(int guessbButtonNum){
+    public boolean guessNextColor(int guessButtonNum){
         // increment the place in the sequence by 1
         placeInSequence++;
 
@@ -73,7 +81,7 @@ public class SimonSaysGame {
         setCurrentCorrectButton(computerPresses.get(placeInSequence));
 
         //check whether the guessed button matches the correct button
-        if (guessbButtonNum == currentCorrectButton)
+        if (guessButtonNum == currentCorrectButton)
             return true;   //the player's guess is correct
         else
             return false;  //the player's guess is incorrect

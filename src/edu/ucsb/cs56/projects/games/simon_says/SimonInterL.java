@@ -167,6 +167,7 @@ public class SimonInterL{
                      FileWriter writer = new FileWriter("HighScoreInterLevel.txt");
                      writer.write("Highest Score: "+ Score);
                      writer.close();
+                     score.setForeground(Color.RED);
                  }catch(IOException ex){
                      ex.printStackTrace();
                  }

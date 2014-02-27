@@ -186,6 +186,7 @@ public class SimonFlash
                      FileWriter writer = new FileWriter("HighScore.txt");
                      writer.write("Highest Score: "+ Score);
                      writer.close();
+                     score.setForeground(Color.RED);
                  }catch(IOException ex){
                      ex.printStackTrace();
                  }

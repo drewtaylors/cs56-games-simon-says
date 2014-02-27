@@ -3,11 +3,11 @@ package edu.ucsb.cs56.projects.games.simon_says.model;
 import java.util.ArrayList;
 
 public class SimonSaysGame {
-    private ArrayList<Integer> computerPresses;
-    private int currentCorrectButton;
-    private int placeInSequence;
+    private ArrayList<Integer> computerPresses;//representing color
+    private int currentCorrectButton;//recording the correct button at certain time in the sequence
+    private int placeInSequence;//recording player's position in the sequence
 
-    // no-arg constructor
+    // no-arg constructor initialize computer presses with 1 random number
     public SimonSaysGame(){
         int randomNum = (int) (Math.random() * 3.9999999);
         computerPresses = new ArrayList<Integer>();
@@ -51,6 +51,9 @@ public class SimonSaysGame {
         this.placeInSequence = newPlaceInSequence;
     }
 
+
+
+
     // returns the length of the sequence currently being guessed
     public int getSequenceLength(){
         return computerPresses.size();
@@ -78,21 +81,27 @@ public class SimonSaysGame {
     }
 
 
-    public void startTurn(int guessNum){
+    // returns 1 if the game is over
+    public int startTurn(int guessNum){
         while(true){
             //create a variable to store the boolean value of guessNextColor
-            //and call guessNextColor to make corresponding changes
+            //and call guessNextColor to make corresponding changes to instance variables
             boolean amIRight = guessNextColor(guessNum);
-            if(!amIRight)
-                break;
+
+            if(!amIRight){
+                endTurn();
+                return 1;
+            }
             else if(sequenceComplete())
                 endTurn();
-                break;
+                return 1;
         }
 
     }
 
+
     public void endTurn(){
+        //reset all the instance variables
         computerPresses.clear();
         placeInSequence = 0;
         currentCorrectButton = computerPresses.get(0);

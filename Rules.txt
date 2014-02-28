@@ -1,8 +1,8 @@
-*The rules for the game is simple.
+*The rules for the game are simple.
 *There will be some buttons on the screen.
-*When you start the game, buttons will start flashing in certain sequence.
+*When you start the game, buttons will start flashing in a certain sequence.
 *When it is your turn,you should click on the buttons sequentially in the same way the buttons previously flashed.
 *If you get the entire sequence correct, a new round will start but with a new button flash(random generated) added to the end of the previous sequence.
-*If your guess is incorrect OR you have got the entire sequence correct, the game ends immediately
+*If your guess is incorrect OR you have got the entire sequence correct, the game ends immediately.
 *Your score of how many rounds you have successfully guessed is recorded.
 *Try your best to get high score!

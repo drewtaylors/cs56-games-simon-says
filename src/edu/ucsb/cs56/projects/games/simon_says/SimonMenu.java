@@ -28,7 +28,7 @@ public class SimonMenu extends JFrame
 		JButton jb = new JButton(MENU[i]);
 		jb.setBackground(new Color(0xCC99FF));
 
-     /*************************/
+
 		jb.setBorderPainted(false);
 		jb.setOpaque(true);
 		jb.addActionListener(new MenuListener());
@@ -43,21 +43,28 @@ public class SimonMenu extends JFrame
 	public void actionPerformed(ActionEvent ex) {
 	    String cmd = ex.getActionCommand();
 	    if(cmd.equals("New Game")){
-	    	dispose();
-	    	SimonFrame frame = new SimonFrame();
-	    	frame.display();
+		dispose();
+		SimonFrame frame = new SimonFrame();
+		frame.display();
 	    }
 	    else if(cmd.equals("Choose Version")){
-			dispose();
-			new SimonLevel();
+		dispose();
+		new SimonLevel();
 	    }
-	    
+
+	    else if(cmd.equals("Rules")){
+		dispose();
+		new SimonRules().setVisible(true);
+	    }
+	    else if(cmd.equals("Exit"))
+		dispose();
+	        
 	}
     }
     
     public static void main(String[] args) {
 	
-      new SimonMenu().setVisible(true);
+	new SimonMenu().setVisible(true);
 	       
     }    
 }

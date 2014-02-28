@@ -10,3 +10,5 @@ build/
 .ant-targets-build.xml
 *.class
 images/
+.idea/
+*.iml

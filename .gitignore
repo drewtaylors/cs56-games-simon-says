@@ -1,6 +1,14 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
+.DS_Store
+*~
+javadoc/
+build/
+.ant-targets-build.xml
+*.class
+images/
+.idea/
+*.iml

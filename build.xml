@@ -1,7 +1,8 @@
 <project default="compile">
 
-  <!-- build.xml for proj02 and proj03, S13, CS56: Simon Says program
-       name: Shanen Cross -->
+  <!-- build.xml for github.com/UCSB-CS56-Projects/cs56-games-simon-says
+          original author: Daniel Reta S12
+	          updated P. Conrad for github W14-->
 
    <property environment="env"/> <!-- load the environment variables --> 
    <property name="webRoot" value="${env.HOME}/public_html/cs56" />
@@ -23,7 +24,7 @@
   </target>
 
   <target name="run" depends="compile" description="run the Simon Says program">
-    <java classname="edu.ucsb.cs56.projects.games.simon_says.SimonFrame" classpath="build" fork="true" />
+    <java classname="edu.ucsb.cs56.projects.games.simon_says.SimonMenu" classpath="build" fork="true" />
   </target>
 
   <target name="clean" description="delete unnecessary files and directories">
@@ -70,7 +71,7 @@
        <batchtest fork="yes">
           <fileset dir="src">
             <!-- this will pick up every class with a name ending in Test -->
-            <include name="*Test.java"/>
+            <include name="**/*Test.java"/>
           </fileset>
        </batchtest>
 

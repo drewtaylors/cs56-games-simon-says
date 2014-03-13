@@ -3,6 +3,17 @@
 W14 ready! (Brynn Kiefer)
 
 
+ - __Navigation__: 
+   - [Introduction](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#introduction)
+   - [Interface](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#interface)
+      - [New Game](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#new-game)
+      - [Choose Version](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#choose-version)
+	  - [Rules](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#rules)
+	  - [Exit](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#exit)
+   - [Documentation](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#documentation)
+   - [How to run](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#how-to-run)
+
+
 ##Introduction
 
  The idea of the game is that a number of colored buttons will flash in some sequence, and the user must then click on the buttons in that same sequence, with one new flash being added to the sequence at the start of each round.  In this implementation, there will be four buttons, a number of which will "flash" in a randomized sequence at the start of each round. Then, the user must click on the buttons in the same order that the buttons flashed. Then for each subsequent round, one more button flash is added to then end of that sequence. The player loses when they click on a button that is out-of-order, and their score will be based on how many rounds.
@@ -81,7 +92,7 @@ W14 ready! (Brynn Kiefer)
 	  this.setPreferredSize(new Dimension(100,100));
 	}
 ```
--- A Color-parameter constructor that calls no-arg constructor to set size and then sets button color to Color passed in as an argument:
+-- A Color-parameter constructor that calls no-arg constructor to set size and then sets button color to Color passed in:
 
 ```java
       public SimonButton(Color color) { 

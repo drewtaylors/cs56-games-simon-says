@@ -1,7 +1,5 @@
 #cs56-games-simon-says
 
-W14 ready! (Brynn Kiefer)
-
 
  - __Navigation__: 
    - [Introduction](https://github.com/PARanOiA1120/cs56-games-simon-says/blob/master/README.md#introduction)

@@ -36,6 +36,10 @@
 
 ![](http://i.imgur.com/OlnZek7.png)
 
+* Also, regardless of what level the player is currently playing, if the player gets a new high score while playing, the "Score:" label at the corner will turn red to indicate that current score is the highest score recorded:
+
+![](http://i.imgur.com/N04a0kb.png)
+
 
 ###Choose Version
 * The "Choose Version" button on the main menu will let player select what level they want to play:

@@ -3,6 +3,9 @@
 project history
 ===============
 ```
+YES | mastergberry | hzpkk520,paranoia1120 | A "Simon Says" game where the player must replicate a series of actions
+```
+```
  W14 | bkiefer13 5pm | hzpkk520,paranoia1120 | A "Simon Says" game where the player must replicate a series of actions
 ```
 

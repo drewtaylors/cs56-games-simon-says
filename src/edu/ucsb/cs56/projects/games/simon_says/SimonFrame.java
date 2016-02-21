@@ -29,11 +29,11 @@ public class SimonFrame extends JFrame {
     public SimonFrame() {
 	super("Simon"); // Window header title
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-	this.setSize(300,300);
+        this.setSize(600,600);
 	
 	// Filler areas that former border around frame
-	final Dimension fillerSizeVert = new Dimension(0, 30);
-	final Dimension fillerSizeHoriz = new Dimension(30, 30);
+        final Dimension fillerSizeVert = new Dimension(0, 60);
+        final Dimension fillerSizeHoriz = new Dimension(60, 60);
 	
 	this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
@@ -130,6 +130,8 @@ public class SimonFrame extends JFrame {
     }
 
     public void display() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 	this.setVisible(true);
 	
 	/* DEBUG, remove

@@ -1,10 +1,13 @@
 package edu.ucsb.cs56.projects.games.simon_says;
 
 import java.awt.*;
+import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
-
+import java.lang.Object;
+import java.awt.geom.Dimension2D;
+import java.awt.Dimension;
 
 
 public class SimonRules extends JFrame{
@@ -18,7 +21,7 @@ public class SimonRules extends JFrame{
     public SimonRules(){
         super("Simon Rules");
         this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-        this.setSize(350,300);
+        this.setSize(350,400);
 
         panel=new JPanel(new BorderLayout());
         this.getContentPane().add(BorderLayout.WEST,panel);
@@ -59,6 +62,8 @@ public class SimonRules extends JFrame{
         panel.setBackground(Color.BLACK);
         textArea.setBackground(Color.BLACK);
         textArea.setForeground(Color.YELLOW);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
         setVisible(true);
 
     }

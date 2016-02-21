@@ -30,7 +30,7 @@ public class SimonProL extends JFrame{
     public SimonProL() {
 	super("Simon Professional"); // Window header title
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-	this.setSize(450,450);
+        this.setSize(450,450);
 	
 	// Filler areas that former border around frame
 	final Dimension fillerSizeVert = new Dimension(0, 38);
@@ -144,6 +144,8 @@ public class SimonProL extends JFrame{
     }
 
     public void display() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
     	this.setVisible(true);
     }
     /** A main() method which calls for the frame to be displayed

@@ -8,7 +8,7 @@ public class SimonLevel extends JFrame{
 
     private JPanel mp;
     private ActionListener al;
-    private final String Level[] = {"Professional", "Intermediate", "Amateur"};
+    private final String Level[] = {"Amateur", "Intermediate", "Professional"};
     private JButton returnButton;
 
     public SimonLevel()

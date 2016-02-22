@@ -21,15 +21,23 @@ public class SimonRules extends JFrame{
     public SimonRules(){
         super("Simon Rules");
         this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-        this.setSize(350,400);
+        this.setSize(600,600);
 
         panel=new JPanel(new BorderLayout());
-        this.getContentPane().add(BorderLayout.WEST,panel);
-        textArea = new JTextArea();
-        scrollPane = new JScrollPane(textArea);
+        final Dimension fillerSizeVert = new Dimension(0, 100);
+        final Dimension fillerSizeHoriz = new Dimension(150, 0);
 
-        scrollPane.setPreferredSize(new Dimension(300, 300));
-        panel.add(BorderLayout.WEST,scrollPane);
+        this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
+        this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
+        this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
+        this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));
+        this.getContentPane().setBackground(Color.BLACK);
+        this.getContentPane().add(BorderLayout.CENTER,panel);
+        textArea = new JTextArea();
+//        scrollPane = new JScrollPane(textArea);
+
+        //scrollPane.setPreferredSize(new Dimension(300, 300));
+        panel.add(BorderLayout.CENTER,textArea);
 
         returnPanel=new JPanel(new BorderLayout());
 

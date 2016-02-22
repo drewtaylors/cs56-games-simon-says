@@ -32,8 +32,8 @@ public class SimonFrame extends JFrame {
         this.setSize(600,600);
 	
 	// Filler areas that former border around frame
-        final Dimension fillerSizeVert = new Dimension(0, 60);
-        final Dimension fillerSizeHoriz = new Dimension(60, 60);
+        final Dimension fillerSizeVert = new Dimension(0, 120);
+        final Dimension fillerSizeHoriz = new Dimension(120, 60);
 	
 	this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));

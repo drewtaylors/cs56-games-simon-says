@@ -75,12 +75,12 @@ public class SimonProFlash {
                         ///   button.removeActionListeners();
                     }
                     for (int button_num : computerButtonPresses) { // iterate through each sequence element
-                        Thread.sleep(500);
+                        Thread.sleep(400);
                         SimonButton button = buttons[button_num]; // for readiblity
                         //System.out.println("hey"); // DEBUG
                         Color buttonColor = button.getBackground();
                         button.setBackground(Color.WHITE);
-                        Thread.sleep(250);
+                        Thread.sleep(150);
                         button.setBackground(buttonColor);
                     }
 

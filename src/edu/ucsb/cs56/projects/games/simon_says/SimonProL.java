@@ -30,11 +30,11 @@ public class SimonProL extends JFrame{
     public SimonProL() {
 	super("Simon Professional"); // Window header title
 	this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
-        this.setSize(450,450);
+        this.setSize(600,600);
 	
 	// Filler areas that former border around frame
-	final Dimension fillerSizeVert = new Dimension(0, 38);
-	final Dimension fillerSizeHoriz = new Dimension(38, 0);
+        final Dimension fillerSizeVert = new Dimension(0, 100);
+        final Dimension fillerSizeHoriz = new Dimension(74, 0);
 	
 	this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));

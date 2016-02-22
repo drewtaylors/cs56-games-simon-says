@@ -14,7 +14,7 @@ public class SimonMenu extends JFrame
     
     private JPanel mp;
     private ActionListener al;
-    private final String MENU[] = {"New Game", "Rules", "Exit"};
+    private final String MENU[] = {"New Game", "Rules", "High Scores", "Exit"};
     
    
     public SimonMenu()
@@ -75,6 +75,11 @@ public class SimonMenu extends JFrame
 		dispose();
 		new SimonRules().setVisible(true);
 	    }
+            else if (cmd.equals("High Scores")){
+                //dispose();
+                //new SimonHighScores().setVisible(true);
+            }
+
 	    else if(cmd.equals("Exit"))
 		dispose();
 	        

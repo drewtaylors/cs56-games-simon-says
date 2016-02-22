@@ -76,8 +76,8 @@ public class SimonMenu extends JFrame
 		new SimonRules().setVisible(true);
 	    }
             else if (cmd.equals("High Scores")){
-                //dispose();
-                //new SimonHighScores().setVisible(true);
+                dispose();
+                new SimonHighScores().setVisible(true);
             }
 
 	    else if(cmd.equals("Exit"))

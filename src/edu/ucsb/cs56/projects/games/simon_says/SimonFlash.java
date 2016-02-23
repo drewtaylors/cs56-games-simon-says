@@ -23,13 +23,13 @@ public class SimonFlash
      private int placeInSequence; // will be zero-based
      private JLabel score;
      private int Score=0;
-     private  int highScore=0;
+     private int highScore=0;
      
      public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
 	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation,score);
 	 sequence.go();
      }
-
+     
      public SimonFlash() { 
 	 //userButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = new ArrayList<Integer>();
@@ -38,13 +38,13 @@ public class SimonFlash
 	     buttons[i] = new SimonButton();
 	 }
 	 startButton = new JButton();
-     returnButton = new JButton();
-     score = new JLabel("Score: 0  ");
-
+	 returnButton = new JButton();
+	 score = new JLabel("Score: 0  ");
+	 
 	 startButtonLocation = new JPanel();
 	 currentButton = 0;
      }
-
+     
      public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
 	 //userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
@@ -61,8 +61,8 @@ public class SimonFlash
 	 this.buttons = buttons;
 	 this.currentButton = flashes.get(0);
 	 this.startButton = startButton;
-     this.returnButton = returnButton;
-     this.score = score;
+	 this.returnButton = returnButton;
+	 this.score = score;
 	 this.startButtonLocation = startButtonLocation;
      }
 
@@ -102,7 +102,7 @@ public class SimonFlash
 	 buttons[1].addActionListener(new RedPushListener());
 	 buttons[2].addActionListener(new YellowPushListener());
 	 buttons[3].addActionListener(new BluePushListener());
-	 startButton.addActionListener(new StartPushListener());
+	 //	 startButton.addActionListener(new StartPushListener());
     // returnButton.addActionListener(new ExitPushListener());
 	 }
 }
@@ -236,13 +236,15 @@ public class SimonFlash
 
      public class StartPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent ex) {
+	     /*
 	      startButtonLocation.remove(startButton); // erase button from screen
 	      startButtonLocation.revalidate();
 	      startButtonLocation.repaint();
-          score.setText("Score: 0  ");
-          Score = 0;
-          score.setForeground(Color.WHITE);
+	      score.setText("Score: 0  ");
+	      Score = 0;
+	      score.setForeground(Color.WHITE);
 	      go();
+	     */
 	 } 
      }
 

@@ -19,7 +19,7 @@ public class SimonGameOver extends JFrame
    
     public SimonGameOver()
     {
-        super("Simon");
+        super("Simon Game Over");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         mp = new JPanel();

@@ -143,7 +143,7 @@ public class SimonProFlash {
                 System.out.println("set buttons enabled false"); // DEBUG
             }
             System.out.println("You lost! Press start to begin again.");
-
+	    new SimonGameOver();
             placeInSequence = 0;
             Random randomGen = new Random(System.currentTimeMillis());
             int randomNum = randomGen.nextInt(4);

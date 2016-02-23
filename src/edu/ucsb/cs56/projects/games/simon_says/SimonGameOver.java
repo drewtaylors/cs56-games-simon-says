@@ -1,83 +1,88 @@
 package edu.ucsb.cs56.projects.games.simon_says;
 
-
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.Toolkit;
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-
-public class SimonGameOver extends JFrame
-{
-    
-    private JPanel mp;
-    private ActionListener al;
-    private final String MENU[] = {"New Game", "Rules", "High Scores", "Exit"};
-    
-   
-    public SimonGameOver()
-    {
-        super("Simon Game Over");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        mp = new JPanel();
-        mp.setBackground(Color.BLACK);
-        mp.setLayout(null);
-             
-        getContentPane().add(BorderLayout.CENTER, mp);
-        for(int i = 0; i < MENU.length; i++)
-	    {
-		JButton jb = new JButton(MENU[i]);
-		jb.setBackground(new Color(0xCC99FF));
+import java.awt.event.*;
+import java.io.*;
+import java.lang.Object;
+import java.awt.geom.Dimension2D;
+import java.awt.Dimension;
 
 
-		jb.setBorderPainted(false);
-		jb.setOpaque(true);
-		jb.addActionListener(new MenuListener());
-                jb.setBounds(140, 125 + 100 * i, 300, 60);
-		mp.add(jb);
+public class SimonGameOver extends JFrame{
+    JPanel panel;
+    JPanel returnPanel;
+    JButton returnButton;
+
+    JTextArea textArea;
+    JScrollPane scrollPane;
+
+    public SimonGameOver(){
+        super("Simon GAME OVER");
+        this.setDefaultCloseOperation(JFrame. EXIT_ON_CLOSE);
+        this.setSize(600,600);
+
+        panel=new JPanel(new BorderLayout());
+        final Dimension fillerSizeVert = new Dimension(0, 150);
+        final Dimension fillerSizeHoriz = new Dimension(150, 0);
+
+        this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
+        this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
+        this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
+        this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));
+        this.getContentPane().setBackground(Color.BLACK);
+        this.getContentPane().add(BorderLayout.CENTER,panel);
+        textArea = new JTextArea();
+//        scrollPane = new JScrollPane(textArea);
+
+        //scrollPane.setPreferredSize(new Dimension(300, 300));
+        panel.add(BorderLayout.CENTER,textArea);
+
+        returnPanel=new JPanel(new BorderLayout());
+
+        this.getContentPane().add(BorderLayout.EAST,returnPanel);
+        returnPanel.setBackground(Color.BLACK);
+
+        returnButton=new JButton("Back");
+        returnButton.setBorderPainted(false);
+        returnButton.setOpaque(true);
+        returnButton.setBackground(Color.BLACK);
+        returnButton.setForeground(Color.CYAN);
+        returnPanel.add(BorderLayout.SOUTH,returnButton);
+        returnButton.addActionListener(new returnListener());
+
+
+
+        try{
+            File myFile = new File("Score.txt");
+            FileReader fileReader = new FileReader(myFile);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line;
+
+            while((line = reader.readLine()) != null) {
+		textArea.append("GAME OVER\n");
+		textArea.append("\n");
+                textArea.append(line + "\n");
 	    }
-
-        setSize(600, 600);
+	    reader.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+	
+        panel.setBackground(Color.BLACK);
+        textArea.setBackground(Color.BLACK);
+        textArea.setForeground(Color.YELLOW);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
         setVisible(true);
+
     }
 
-    public class MenuListener implements ActionListener{
-	public void actionPerformed(ActionEvent ex) {
-	    String cmd = ex.getActionCommand();
-	    if(cmd.equals("New Game")){
-		dispose();
-                new SimonLevel();
-	    }
 
-	    else if(cmd.equals("Rules")){
-		dispose();
-		new SimonRules().setVisible(true);
-	    }
-            else if (cmd.equals("High Scores")){
-                dispose();
-                new SimonHighScores().setVisible(true);
-            }
-
-	    else if(cmd.equals("Exit"))
-		dispose();
-	        
-	}
+    public class returnListener implements ActionListener {
+        public void actionPerformed(ActionEvent ex){
+            dispose();
+        }
     }
-    
-    public static void main(String[] args) {
-	
-	SimonMenu game = new SimonMenu();
-	PictureComponent component = new PictureComponent();
-
-	game.add(component);
-	game.setVisible(true);
-
-	
-	       
-    }    
 }

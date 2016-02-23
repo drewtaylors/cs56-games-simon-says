@@ -127,7 +127,7 @@ public class SimonInterL {
 	     } catch(IOException e){
                  e.printStackTrace();
              }
-	    
+	     new SimonGameOver();
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
 		 button.removeActionListeners();

@@ -100,7 +100,6 @@ public class SimonFrame extends JFrame {
 
     public class StartListener implements ActionListener {
 	public void actionPerformed(ActionEvent ex) {
-	        
 	    bottomInner.remove(startButton); // erase button from screen
 
 	    bottomInner.revalidate();

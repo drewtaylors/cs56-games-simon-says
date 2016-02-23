@@ -79,5 +79,4 @@ public class SimonLevel extends JFrame{
 
         }
     }
-
 }

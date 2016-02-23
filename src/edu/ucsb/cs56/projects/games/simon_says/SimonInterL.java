@@ -9,7 +9,7 @@ import java.lang.*;
 
 /** Speed up version of SimonFlash for intermediate level
  */
-public class SimonInterL{
+public class SimonInterL {
     
     private ArrayList<Integer> computerButtonPresses;
     private SimonButton[] buttons; // order: Green Red, Yellow, Blue
@@ -90,7 +90,7 @@ public class SimonInterL{
 	 }
 }
 
-    protected void  lossCheck(int buttonNum) {
+    protected void lossCheck(int buttonNum) {
 	 //userButtonPresses.add(computerButtonPresses.get(currentButton));
 	 placeInSequence++;
 	 boolean didWeLose = false; // initialization just in case for debug
@@ -120,6 +120,20 @@ public class SimonInterL{
 
     private void endRound(boolean didWeLose) {
 	 if (didWeLose == true) {
+	     try {
+		 FileWriter writer = new FileWriter("Score.txt");
+		 writer.write("Your score was "+ Score + "!");
+		 writer.close();
+	     } catch(IOException e){
+                 e.printStackTrace();
+             }
+	     /*
+	     dispose();
+	     SimonInterLF inter=new SimonInterLF();
+	     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	     inter.setLocation(dim.width/2-inter.getSize().width/2,dim.height/2-inter.getSize().height/2);
+	     inter.setVisible(true);
+	     */
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
 		 button.removeActionListeners();
@@ -138,6 +152,7 @@ public class SimonInterL{
 	     startButtonLocation.add(startButton); // add button back to screen
 	     startButtonLocation.revalidate();
 	     startButtonLocation.repaint();
+	     
 	 }
 	 else if (didWeLose == false) {
 	     System.out.println("Success! Onto the next round!");
@@ -216,13 +231,22 @@ public class SimonInterL{
 
     public class StartPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent ex) {
+	     /*
+	     dispose();                                                                                     
+             SimonInterLF inter=new SimonInterLF();                                                         
+             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();                                   
+             inter.setLocation(dim.width/2-inter.getSize().width/2,dim.height/2-inter.getSize().height/2);  
+             inter.setVisible(true);
+	     */
+	     System.out.println("starting");
 	      startButtonLocation.remove(startButton); // erase button from screen
 	      startButtonLocation.revalidate();
 	      startButtonLocation.repaint();
-          score.setText("Score: 0  ");
-          Score = 0;
-         score.setForeground(Color.WHITE);
+	      score.setText("Score: 0  ");
+	      Score = 0;
+	      score.setForeground(Color.WHITE);
 	      go();
+	     
 	 } 
     }	
 	

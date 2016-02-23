@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
-public class SimonMenu extends JFrame
+public class SimonGameOver extends JFrame
 {
     
     private JPanel mp;
@@ -17,7 +17,7 @@ public class SimonMenu extends JFrame
     private final String MENU[] = {"New Game", "Rules", "High Scores", "Exit"};
     
    
-    public SimonMenu()
+    public SimonGameOver()
     {
         super("Simon");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,17 +25,6 @@ public class SimonMenu extends JFrame
         mp = new JPanel();
         mp.setBackground(Color.BLACK);
         mp.setLayout(null);
-//        BufferedImage myPicture;
-//        try {
-//            myPicture = ImageIO.read(new File("Simon_Says_robredeyes2.jpg"));
-//        } catch (IOException ex) {
-//        }
-
-//        void paintComponent(Graphics g) {
-//            super.paintComponent(g);
-//            g.drawImage(myPicture, 10, 10, null);
-//        }
-
              
         getContentPane().add(BorderLayout.CENTER, mp);
         for(int i = 0; i < MENU.length; i++)
@@ -57,15 +46,6 @@ public class SimonMenu extends JFrame
         setVisible(true);
     }
 
-    public void paintComponent(Graphics g) {
-	Graphics2D g2 = (Graphics2D) g;
-	g2.drawString("Description and your name go here", 20,20);
-
-        Image image = new ImageIcon("Simon_Says_robredeyes2.jpg").getImage();
-        g2.drawImage(image, 10,10,this);
-    }
-
-      
     public class MenuListener implements ActionListener{
 	public void actionPerformed(ActionEvent ex) {
 	    String cmd = ex.getActionCommand();
@@ -90,11 +70,14 @@ public class SimonMenu extends JFrame
     }
     
     public static void main(String[] args) {
-	SimonMenu menu = new SimonMenu();
+	
+	SimonMenu game = new SimonMenu();
 	PictureComponent component = new PictureComponent();
 
-	menu.add(component);
-	menu.setVisible(true);
+	game.add(component);
+	game.setVisible(true);
+
+	
 	       
     }    
 }

@@ -7,9 +7,9 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
-/** Speed up version of SimonFlash for intermediate level
+/** Sped up version of SimonFlash for intermediate level
  */
-public class SimonInterL{
+public class SimonInterL {
     
     private ArrayList<Integer> computerButtonPresses;
     private SimonButton[] buttons; // order: Green Red, Yellow, Blue
@@ -26,28 +26,28 @@ public class SimonInterL{
 	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton,startButtonLocation,score);
 	 sequence.go();
     }
-
+    
     public SimonInterL() { 
     	computerButtonPresses = new ArrayList<Integer>();
-   	 	buttons = new SimonButton[4];
-   	 	for (int i=0; i<4; i++) {
-   	 		buttons[i] = new SimonButton();
-   	 	}
-   	 	startButton = new JButton();
-        returnButton = new JButton();
+	buttons = new SimonButton[4];
+	for (int i=0; i<4; i++) {
+	    buttons[i] = new SimonButton();
+	}
+	startButton = new JButton();
+	returnButton = new JButton();
         score = new JLabel("Score: 0  ");
-   	 	startButtonLocation = new JPanel();
-   	 	currentButton = 0;
+	startButtonLocation = new JPanel();
+	currentButton = 0;
     }
-
+    
     public SimonInterL(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
     	computerButtonPresses = flashes;
     	this.buttons = buttons;
-   	 	this.currentButton = flashes.get(0);
-   	 	this.startButton = startButton;
+	this.currentButton = flashes.get(0);
+	this.startButton = startButton;
         this.returnButton = returnButton;
         this.score = score;
-   	 	this.startButtonLocation = startButtonLocation;
+	this.startButtonLocation = startButtonLocation;
     }
 
 
@@ -72,25 +72,25 @@ public class SimonInterL{
 			     Thread.sleep(150);
 			     button.setBackground(buttonColor);
 			 }
-
+			 
 			 for (SimonButton button : buttons) { // reactivate buttons
 			     button.setEnabled(true);
 			 }
 		     } catch (InterruptedException ex) {ex.printStackTrace();}
-	     }
+		 }
 	     }).start();
-    
-    // Change this to 1 later -  DEBUG
-    if (computerButtonPresses.size() == 1 ) {
-	 buttons[0].addActionListener(new GreenPushListener()); // listen for inputs
-	 buttons[1].addActionListener(new RedPushListener());
-	 buttons[2].addActionListener(new YellowPushListener());
-	 buttons[3].addActionListener(new BluePushListener());
-	 startButton.addActionListener(new StartPushListener());
+	 
+	 // Change this to 1 later -  DEBUG
+	 if (computerButtonPresses.size() == 1 ) {
+	     buttons[0].addActionListener(new GreenPushListener()); // listen for inputs
+	     buttons[1].addActionListener(new RedPushListener());
+	     buttons[2].addActionListener(new YellowPushListener());
+	     buttons[3].addActionListener(new BluePushListener());
+	     //	     startButton.addActionListener(new StartPushListener());
 	 }
-}
-
-    protected void  lossCheck(int buttonNum) {
+    }
+    
+    protected void lossCheck(int buttonNum) {
 	 //userButtonPresses.add(computerButtonPresses.get(currentButton));
 	 placeInSequence++;
 	 boolean didWeLose = false; // initialization just in case for debug
@@ -120,6 +120,14 @@ public class SimonInterL{
 
     private void endRound(boolean didWeLose) {
 	 if (didWeLose == true) {
+	     try {
+		 FileWriter writer = new FileWriter("Score.txt");
+		 writer.write("Your score was "+ Score + "!");
+		 writer.close();
+	     } catch(IOException e){
+                 e.printStackTrace();
+             }
+	     new SimonGameOver();
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
 		 button.removeActionListeners();
@@ -138,51 +146,52 @@ public class SimonInterL{
 	     startButtonLocation.add(startButton); // add button back to screen
 	     startButtonLocation.revalidate();
 	     startButtonLocation.repaint();
+	     
 	 }
 	 else if (didWeLose == false) {
 	     System.out.println("Success! Onto the next round!");
 	     // initiate new round
-         Score++;
-         score.setText("Score: "+Score+"  ");
-
-         try{
-             File myFile = new File("HighScoreInterLevel.txt");
-             FileReader fileReader = new FileReader(myFile);
-             BufferedReader reader = new BufferedReader(fileReader);
-             String line;
-             String l=null;
-             while((line=reader.readLine())!=null) {
-                 l=line;
+	     Score++;
+	     score.setText("Score: "+Score+"  ");
+	     
+	     try{
+		 File myFile = new File("HighScoreInterLevel.txt");
+		 FileReader fileReader = new FileReader(myFile);
+		 BufferedReader reader = new BufferedReader(fileReader);
+		 String line;
+		 String l=null;
+		 while((line=reader.readLine())!=null) {
+		     l=line;
+		 }
+		 String[] HighestScore = l.split(": ");
+		 String s=null;
+		 for(String token:HighestScore){
+		     s=token;
              }
-             String[] HighestScore = l.split(": ");
-             String s=null;
-             for(String token:HighestScore){
-                 s=token;
-             }
-             highScore= Integer.parseInt(String.valueOf(s));
-             reader.close();
-
-             if(highScore<Score){
-                 try{
-                     FileWriter writer = new FileWriter("HighScoreInterLevel.txt");
-                     writer.write("Highest Score: "+ Score);
-                     writer.close();
+		 highScore= Integer.parseInt(String.valueOf(s));
+		 reader.close();
+		 
+		 if(highScore<Score){
+		     try{
+			 FileWriter writer = new FileWriter("HighScoreInterLevel.txt");
+			 writer.write("Highest Score: "+ Score);
+			 writer.close();
                      score.setForeground(Color.RED);
-                 }catch(IOException ex){
-                     ex.printStackTrace();
-                 }
-             }
-         }catch (IOException ex){
-             try{
-                 FileWriter writer = new FileWriter("HighScoreInterLevel.txt");
-                 writer.write("Highest Score: "+ Score);
-                 writer.close();
-             }catch(IOException e){
-                 e.printStackTrace();
-             }
-
-         }
-
+		     }catch(IOException ex){
+			 ex.printStackTrace();
+		     }
+		 }
+	     }catch (IOException ex){
+		 try{
+		     FileWriter writer = new FileWriter("HighScoreInterLevel.txt");
+		     writer.write("Highest Score: "+ Score);
+		     writer.close();
+		 }catch(IOException e){
+		     e.printStackTrace();
+		 }
+		 
+	     }
+	     
 	     Random randomGen = new Random(System.currentTimeMillis());
 	     int randomNum = randomGen.nextInt(4);
 	     int randomNum2 = (int)( Math.random() * 3.9999999); 
@@ -192,7 +201,7 @@ public class SimonInterL{
 	     go();
 	 }
     }
-
+    
     public class GreenPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
 	     lossCheck(0);
@@ -213,18 +222,18 @@ public class SimonInterL{
 	     lossCheck(3);
 	 }
     }
-
+    
     public class StartPushListener implements ActionListener {
-	 public void actionPerformed(ActionEvent ex) {
-	      startButtonLocation.remove(startButton); // erase button from screen
-	      startButtonLocation.revalidate();
-	      startButtonLocation.repaint();
-          score.setText("Score: 0  ");
-          Score = 0;
-         score.setForeground(Color.WHITE);
-	      go();
-	 } 
+	public void actionPerformed(ActionEvent ex) {
+	    /*
+	    startButtonLocation.remove(startButton); // erase button from screen
+	    startButtonLocation.revalidate();
+	    startButtonLocation.repaint();
+	    score.setText("Score: 0  ");
+	    Score = 0;
+	    score.setForeground(Color.WHITE);
+	    go();
+	    */
+	} 
     }	
-	
-	  
 }

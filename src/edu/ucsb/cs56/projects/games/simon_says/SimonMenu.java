@@ -59,8 +59,11 @@ public class SimonMenu extends JFrame
     }
 
     public void paintComponent(Graphics g) {
+	Graphics2D g2 = (Graphics2D) g;
+	g2.drawString("Description and your name go here", 20,20);
+
         Image image = new ImageIcon("Simon_Says_robredeyes2.jpg").getImage();
-        g.drawImage(image, 10,10,this);
+        g2.drawImage(image, 10,10,this);
     }
 
       
@@ -77,8 +80,8 @@ public class SimonMenu extends JFrame
 		new SimonRules().setVisible(true);
 	    }
             else if (cmd.equals("High Scores")){
-                //dispose();
-                //new SimonHighScores().setVisible(true);
+                dispose();
+                new SimonHighScores().setVisible(true);
             }
 
 	    else if(cmd.equals("Exit"))
@@ -88,8 +91,11 @@ public class SimonMenu extends JFrame
     }
     
     public static void main(String[] args) {
-	
-	new SimonMenu().setVisible(true);
+	SimonMenu menu = new SimonMenu();
+	PictureComponent component = new PictureComponent();
+
+	menu.add(component);
+	menu.setVisible(true);
 	       
     }    
 }

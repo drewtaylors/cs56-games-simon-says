@@ -31,7 +31,7 @@ public class SimonInterLF extends SimonFrame {
 
 		flash.go();
 		System.out.println("after flash sequence"); // DEBUG}
-	    }
+	}
 	    
 	  
 

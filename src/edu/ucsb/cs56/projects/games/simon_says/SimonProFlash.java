@@ -99,7 +99,7 @@ public class SimonProFlash {
             buttons[3].addActionListener(new BluePushListener());
             buttons[4].addActionListener(new PinkPushListener());
             buttons[5].addActionListener(new GrayPushListener());
-            startButton.addActionListener(new StartPushListener());
+	    //            startButton.addActionListener(new StartPushListener());
             // returnButton.addActionListener(new ExitPushListener());
         }
     }
@@ -143,7 +143,7 @@ public class SimonProFlash {
                 System.out.println("set buttons enabled false"); // DEBUG
             }
             System.out.println("You lost! Press start to begin again.");
-
+	    new SimonGameOver();
             placeInSequence = 0;
             Random randomGen = new Random(System.currentTimeMillis());
             int randomNum = randomGen.nextInt(4);
@@ -247,6 +247,7 @@ public class SimonProFlash {
 
     public class StartPushListener implements ActionListener {
         public void actionPerformed(ActionEvent ex) {
+	    /*
             startButtonLocation.remove(startButton); // erase button from screen
             startButtonLocation.revalidate();
             startButtonLocation.repaint();
@@ -254,6 +255,7 @@ public class SimonProFlash {
             Score = 0;
             score.setForeground(Color.WHITE);
             go();
+	    */
         }
     }
 

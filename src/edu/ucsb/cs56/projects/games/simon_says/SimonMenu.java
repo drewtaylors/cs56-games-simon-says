@@ -13,6 +13,7 @@ public class SimonMenu extends JFrame
 {
     
     private JPanel mp;
+    private ImagePanel ip;
     private ActionListener al;
     private final String MENU[] = {"New Game", "Rules", "High Scores", "Exit"};
     
@@ -25,19 +26,19 @@ public class SimonMenu extends JFrame
         mp = new JPanel();
         mp.setBackground(Color.BLACK);
         mp.setLayout(null);
-//        BufferedImage myPicture;
-//        try {
-//            myPicture = ImageIO.read(new File("Simon_Says_robredeyes2.jpg"));
-//        } catch (IOException ex) {
-//        }
-
-//        void paintComponent(Graphics g) {
-//            super.paintComponent(g);
-//            g.drawImage(myPicture, 10, 10, null);
-//        }
+        ip = new ImagePanel();
+        ip.setBackground(Color.BLACK);
+        ip.setPreferredSize(new Dimension(300,150));
+//        BufferedImage myPic;
+//    try {
+//        myPic = ImageIO.read(new File("/cs/student/davidwang/cs56/cs56-games-simon-says/src/edu/ucsb/cs56/projects/games/simon_says/Simon_Says_robredeyes2.jpg"));
+//    } catch(IOException ex) {}
+//        JLabel picLabel = new JLabel(new ImageIcon(myPic));
+//        ip.add(picLabel);
 
              
         getContentPane().add(BorderLayout.CENTER, mp);
+        getContentPane().add(BorderLayout.NORTH,ip);
         for(int i = 0; i < MENU.length; i++)
 	    {
 		JButton jb = new JButton(MENU[i]);
@@ -47,7 +48,7 @@ public class SimonMenu extends JFrame
 		jb.setBorderPainted(false);
 		jb.setOpaque(true);
 		jb.addActionListener(new MenuListener());
-                jb.setBounds(140, 125 + 100 * i, 300, 60);
+                jb.setBounds(140, 10 + 100 * i, 300, 60);
 		mp.add(jb);
 	    }
 

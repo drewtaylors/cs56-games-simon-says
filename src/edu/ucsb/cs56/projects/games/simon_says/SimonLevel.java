@@ -7,6 +7,7 @@ import javax.swing.*;
 public class SimonLevel extends JFrame{
 
     private JPanel mp;
+    private ImagePanel ip;
     private ActionListener al;
     private final String Level[] = {"Amateur", "Intermediate", "Professional"};
     private JButton returnButton;
@@ -20,23 +21,27 @@ public class SimonLevel extends JFrame{
 	mp = new JPanel();
 	mp.setBackground(Color.BLACK);
 	mp.setLayout(null);
+        ip = new ImagePanel();
+        ip.setBackground(Color.BLACK);
+        ip.setPreferredSize(new Dimension(300,150));
 
         returnButton = new JButton("Back");
 	returnButton.setBackground(new Color(0x3399FF));
 	returnButton.setBorderPainted(false);
 	returnButton.setOpaque(true);
-        returnButton.setBounds(140, 352, 300,40);
+        returnButton.setBounds(140, 242, 300,40);
 	mp.add(returnButton);
 	returnButton.addActionListener(new returnListener());
 
         getContentPane().add(BorderLayout.CENTER, mp);
+        getContentPane().add(BorderLayout.NORTH,ip);
 	for(int i = 0; i < Level.length; i++){
 	    JButton jb = new JButton(Level[i]);
 	    jb.setBackground(new Color(0x3399FF));
 	    jb.setBorderPainted(false);
 	    jb.setOpaque(true);
 	    jb.addActionListener(new LevelListener());
-            jb.setBounds(140, 160 + 64 * i, 300, 40);
+            jb.setBounds(140, 50 + 64 * i, 300, 40);
 	    mp.add(jb);
 	}
         setSize(600, 600);

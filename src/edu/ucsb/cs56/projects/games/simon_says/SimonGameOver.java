@@ -12,6 +12,7 @@ import java.awt.Dimension;
 
 public class SimonGameOver extends JFrame{
     JPanel panel;
+    ImagePanel ip;
     JPanel returnPanel;
     JButton returnButton;
 
@@ -24,10 +25,13 @@ public class SimonGameOver extends JFrame{
         this.setSize(600,600);
 
         panel=new JPanel(new BorderLayout());
+	ip = new ImagePanel(2);
+	ip.setBackground(Color.BLACK);
+	ip.setPreferredSize(new Dimension(400,300));
         final Dimension fillerSizeVert = new Dimension(0, 150);
         final Dimension fillerSizeHoriz = new Dimension(150, 0);
 
-        this.getContentPane().add(BorderLayout.NORTH, Box.createRigidArea(fillerSizeVert));
+        this.getContentPane().add(BorderLayout.NORTH, ip);
         this.getContentPane().add(BorderLayout.SOUTH, Box.createRigidArea(fillerSizeVert));
         this.getContentPane().add(BorderLayout.WEST, Box.createRigidArea(fillerSizeHoriz));
         this.getContentPane().add(BorderLayout.EAST, Box.createRigidArea(fillerSizeHoriz));
@@ -61,8 +65,6 @@ public class SimonGameOver extends JFrame{
             String line;
 
             while((line = reader.readLine()) != null) {
-		textArea.append("GAME OVER\n");
-		textArea.append("\n");
                 textArea.append(line + "\n");
 	    }
 	    reader.close();

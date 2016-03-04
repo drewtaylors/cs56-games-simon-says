@@ -26,7 +26,7 @@ public class SimonMenu extends JFrame
         mp = new JPanel();
         mp.setBackground(Color.BLACK);
         mp.setLayout(null);
-        ip = new ImagePanel();
+        ip = new ImagePanel(1);
         ip.setBackground(Color.BLACK);
         ip.setPreferredSize(new Dimension(300,150));
 //        BufferedImage myPic;

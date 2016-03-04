@@ -13,7 +13,10 @@ import java.awt.Graphics2D;
 
 public class ImagePanel extends JPanel{
 
-    private BufferedImage image;
+    private BufferedImage logo;
+    private BufferedImage gameover;
+    int picNum; //logo is pic 1, gameover is pic 2
+    
 
     public  BufferedImage resizeImage(BufferedImage image, int width, int height) {
              int type=0;
@@ -25,10 +28,17 @@ public class ImagePanel extends JPanel{
             return resizedImage;
          }
 
-    public ImagePanel() {
+    public void setpicNum(int picNum){
+	this.picNum=picNum;
+    }
+    
+    public ImagePanel(int picNum) {
+	this.picNum = picNum;
        try {
-          image = ImageIO.read(new File("Simon_Says_robredeyes2.jpg"));
-          image = resizeImage(image,500,125);
+          logo = ImageIO.read(new File("Simon_Says_robredeyes2.jpg"));
+	  gameover = ImageIO.read(new File("gameover.jpg"));
+          logo = resizeImage(logo,500,125);
+	  gameover = resizeImage(gameover,300,300);
       } catch (IOException ex) {
             // handle exception...
        }
@@ -37,7 +47,12 @@ public class ImagePanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 50, 0, null); // see javadoc for more info on the parameters
+	if (picNum == 1){
+	    g.drawImage(logo, 50, 0, null);
+	}
+	else if(picNum == 2){
+	    g.drawImage(gameover,150,0,null);
+	}
     }
 
 }

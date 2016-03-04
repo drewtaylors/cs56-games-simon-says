@@ -140,6 +140,13 @@ public class SimonFlash
 
      private void endRound(boolean didWeLose) {
 	 if (didWeLose == true) {
+	     try {
+		 FileWriter writer = new FileWriter("Score.txt");
+		 writer.write("Your score was "+ Score + "!");
+		 writer.close();
+	     } catch(IOException e){
+                 e.printStackTrace();
+             }
 	     for (SimonButton button : buttons) {
 		 button.setEnabled(false);
 		 button.removeActionListeners();

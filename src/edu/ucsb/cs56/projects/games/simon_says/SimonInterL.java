@@ -6,6 +6,9 @@ import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 import java.lang.*;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 
 /** Sped up version of SimonFlash for intermediate level
  */
@@ -69,6 +72,7 @@ public class SimonInterL {
 			     //System.out.println("hey"); // DEBUG
 			     Color buttonColor = button.getBackground();
 			     button.setBackground(Color.WHITE);
+			     startMidi();
 			     Thread.sleep(150);
 			     button.setBackground(buttonColor);
 			 }
@@ -204,23 +208,41 @@ public class SimonInterL {
     
     public class GreenPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
+	     startMidi();
 	     lossCheck(0);
 	 }
     }
     public class RedPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
+	     startMidi();
 	     lossCheck(1);
 	 }
     }
     public class YellowPushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
+	     startMidi();
 	     lossCheck(2);
 	 }
     }
     public class BluePushListener implements ActionListener {
 	 public void actionPerformed(ActionEvent e) {
+	     startMidi();
 	     lossCheck(3);
 	 }
+    }
+
+    private void startMidi() {
+	try {
+	    Sequence sequence = MidiSystem.getSequence(new File("beep.mid"));
+	    Sequencer sequencer = MidiSystem.getSequencer();
+	    sequencer.open();
+	    sequencer.setSequence(sequence);
+	    
+	    sequencer.start();
+	}
+	catch (Exception e) {
+	    e.printStackTrace();
+	}
     }
     
     public class StartPushListener implements ActionListener {

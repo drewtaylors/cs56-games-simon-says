@@ -6,6 +6,9 @@ import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 import java.lang.*;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 
 
 public class SimonProFlash {
@@ -80,6 +83,7 @@ public class SimonProFlash {
                         //System.out.println("hey"); // DEBUG
                         Color buttonColor = button.getBackground();
                         button.setBackground(Color.WHITE);
+			startMidi();
                         Thread.sleep(150);
                         button.setBackground(buttonColor);
                     }
@@ -221,34 +225,40 @@ public class SimonProFlash {
 
     public class GreenPushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+	    startMidi();
             lossCheck(0);
         }
     }
     public class RedPushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+	    startMidi();
             lossCheck(1);
         }
     }
     public class YellowPushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            lossCheck(2);
+	    startMidi();
+	    lossCheck(2);
         }
     }
     public class BluePushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            lossCheck(3);
+	    startMidi();
+	    lossCheck(3);
         }
     }
 
     public class PinkPushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            lossCheck(4);
+	    startMidi();
+	    lossCheck(4);
         }
     }
 
     public class GrayPushListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            lossCheck(5);
+	    startMidi();
+	    lossCheck(5);
         }
     }
 
@@ -264,6 +274,20 @@ public class SimonProFlash {
             go();
 	    */
         }
+    }
+
+    private void startMidi() {
+	try {
+	    Sequence sequence = MidiSystem.getSequence(new File("beep.mid"));
+	    Sequencer sequencer = MidiSystem.getSequencer();
+	    sequencer.open();
+	    sequencer.setSequence(sequence);
+	    
+	    sequencer.start();
+	}
+	catch (Exception e) {
+	    e.printStackTrace();
+	}
     }
 
 

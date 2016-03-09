@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+
 
 public class SimonMenu extends JFrame
 {
@@ -22,7 +26,7 @@ public class SimonMenu extends JFrame
     {
         super("Simon");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+   
         mp = new JPanel();
         mp.setBackground(Color.BLACK);
         mp.setLayout(null);
@@ -89,7 +93,22 @@ public class SimonMenu extends JFrame
 	        
 	}
     }
-    
+
+     private void startMidi() {
+	try {
+	    Sequence sequence = MidiSystem.getSequence(new File("skrillex.mid"));
+	    Sequencer sequencer = MidiSystem.getSequencer();
+	    sequencer.open();
+	    sequencer.setSequence(sequence);
+	    
+	    sequencer.start();
+	    sequencer.setLoopCount(Integer.MAX_VALUE);
+	}
+	catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
     public static void main(String[] args) {
 	SimonMenu menu = new SimonMenu();
 	PictureComponent component = new PictureComponent();

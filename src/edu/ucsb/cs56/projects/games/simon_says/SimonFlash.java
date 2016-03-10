@@ -86,17 +86,17 @@ public class SimonFlash
 			     Thread.sleep(500);
 			     SimonButton button = buttons[button_num]; // for readiblity
 			     //System.out.println("hey"); // DEBUG
-			     Color buttonColor = button.getBackground();
-			     startMidi();
-			     button.setBackground(Color.WHITE);
-			     Thread.sleep(250);
+                             Color buttonColor = button.getBackground();
+                             startMidi();
+                             button.setBackground(Color.WHITE);
+                             Thread.sleep(250);
 			     button.setBackground(buttonColor);
 			 }
 
 			 for (SimonButton button : buttons) { // reactivate buttons
 			     button.setEnabled(true);
 			 }
-		     } catch (InterruptedException ex) {ex.printStackTrace();}
+                     } catch (InterruptedException ex) {ex.printStackTrace();}
 	     }
 	     }).start();
      
@@ -190,7 +190,7 @@ public class SimonFlash
                 for(String token:HighestScore){
                     s=token;
                 }
-                highScore= Integer.parseInt(String.valueOf(s));
+                //highScore= Integer.parseInt(String.valueOf(s));
                 reader.close();
 
                 if(highScore<Score){

@@ -1,2 +1,1 @@
-Highest Score: 7
-
+Highest Score: 1

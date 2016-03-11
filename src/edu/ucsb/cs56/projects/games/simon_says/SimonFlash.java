@@ -25,11 +25,13 @@ public class SimonFlash
      private int currentButton; 
      private int placeInSequence; // will be zero-based
      private JLabel score;
+     private JLabel HighScore;
      private int Score=0;
      private int highScore=0;
+     private String l2;
      
-     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
-	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation,score);
+     public static void  FlashSequence(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel HighScore, JLabel score) {
+	 SimonFlash sequence = new SimonFlash(flashes, buttons, startButton, returnButton, startButtonLocation, HighScore, score);
 	 sequence.go();
      }
      
@@ -42,13 +44,28 @@ public class SimonFlash
 	 }
 	 startButton = new JButton();
 	 returnButton = new JButton();
+	 try {
+	     File myFile = new File("HighScore.txt");
+	     FileReader fileReader = new FileReader(myFile);
+	     BufferedReader reader = new BufferedReader(fileReader);
+	     String line2;
+	     while((line2=reader.readLine())!=null) {
+		 l2=line2;
+	     }
+	     System.out.println(l2);
+	     HighScore = new JLabel(l2);
+	     HighScore.setForeground(Color.WHITE);
+	 }
+	 catch (IOException ex) {
+	     ex.printStackTrace();
+	 }
 	 score = new JLabel("Score: 0  ");
 	 
 	 startButtonLocation = new JPanel();
 	 currentButton = 0;
      }
      
-     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel score) {
+     public SimonFlash(ArrayList<Integer> flashes, SimonButton[] buttons, JButton startButton, JButton returnButton, JComponent startButtonLocation, JLabel HighScore, JLabel score) {
 	 //userButtonPresses = new ArrayList<Integer>();
 	 //	 this.computerButtonPresses = new ArrayList<Integer>();
 	 computerButtonPresses = flashes;
@@ -65,6 +82,7 @@ public class SimonFlash
 	 this.currentButton = flashes.get(0);
 	 this.startButton = startButton;
 	 this.returnButton = returnButton;
+	 this.HighScore = HighScore;
 	 this.score = score;
 	 this.startButtonLocation = startButtonLocation;
      }

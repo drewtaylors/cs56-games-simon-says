@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 /** JFrame which contains all of the components for the Simon game.
  */
@@ -17,13 +19,16 @@ public class SimonFrame extends JFrame {
     JButton startButton;
     JButton returnButton;
     JLabel  score;
+    JLabel HighScore;
 
     JPanel center;
     JPanel top;
     JPanel bottom;
     JPanel bottomInner;
     JPanel topInner;
+    JPanel topInner2;
 
+    String l2;
     /** No-arg frame constructor, sets up frame and layout of panels and components
      */
     public SimonFrame() {
@@ -77,14 +82,33 @@ public class SimonFrame extends JFrame {
 	
 	startButton.addActionListener(new StartListener()); // DEBUG
 	returnButton.addActionListener(new ExitListener());
-	
+	try {
+	    File myFile = new File("HighScore.txt");
+	    FileReader fileReader = new FileReader(myFile);
+	    BufferedReader reader = new BufferedReader(fileReader);
+	    String line2;
+	    while((line2=reader.readLine())!=null) {
+		l2=line2;
+	    }
+	    System.out.println(l2);
+	    HighScore = new JLabel(l2);
+	    HighScore.setForeground(Color.WHITE);
+	}
+	catch (IOException ex) {
+	    ex.printStackTrace();
+	}
 	score = new JLabel("Score: 0  ");
 	score.setForeground(Color.WHITE);
 	topInner = new JPanel(new BorderLayout());
+	//	topInner2 = new JPanel(new BorderLayout());
 	
+	//topInner.add(BorderLayout., HighScore);
+	topInner.add(BorderLayout.WEST, HighScore);
 	topInner.add(BorderLayout.EAST,score);
 	this.topInner.add(Box.createRigidArea(fillerSizeVert));
 	this.getContentPane().add(BorderLayout.NORTH, topInner);
+	//this.topInner2.add(Box.createRigidArea(fillerSizeVert));
+	//this.getContentPane().add(BorderLayout.NORTH, topInner2);
 	
 	// Color all of the background within the border black as well
 	top.setBackground(Color.BLACK);
@@ -92,7 +116,7 @@ public class SimonFrame extends JFrame {
 	center.setBackground(Color.BLACK);
 	bottomInner.setBackground(Color.BLACK);
 	topInner.setBackground(Color.BLACK);
-
+	//topInner2.setBackground(Color.BLACK);
     }
 
     
@@ -173,7 +197,7 @@ public class SimonFrame extends JFrame {
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
 	test_array.add(randomNum2); // one element to start off with
-	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, returnButton, bottomInner, score);
+	SimonFlash flash = new SimonFlash(test_array, button_array, startButton, returnButton, bottomInner, HighScore, score);
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }

@@ -66,11 +66,11 @@ public class SimonFrame extends JFrame {
 	bottom.add(BorderLayout.EAST, blueButton); // ...and blue on the right
 	
 	// Add Start button to bottom to Filler area
-	startButton = new JButton("Start");
 	returnButton = new JButton("Exit");
+	startButton = new JButton("Start");
 	bottomInner = new JPanel(); // Create a panel to put button so button doesn't span whole border
-	bottomInner.add(startButton);
 	bottomInner.add(returnButton);
+	bottomInner.add(startButton);	
 	this.bottomInner.add(Box.createRigidArea(fillerSizeVert)); // Makes sure that when button is deleted, the filler area
 	                                                           // of the proper size will remain behind it
 	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //

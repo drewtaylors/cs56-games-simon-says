@@ -87,8 +87,8 @@ public class SimonProL extends JFrame{
 	startButton = new JButton("Start");
     returnButton = new  JButton("Exit");
 	bottomInner = new JPanel(); // Create a panel to put button so button doesn't span whole border
-	bottomInner.add(startButton);
     bottomInner.add(returnButton);
+    	bottomInner.add(startButton);
 	this.bottomInner.add(Box.createRigidArea(fillerSizeVert)); // Makes sure that when button is deleted, the filler area
 	                                                           // of the proper size will remain behind it
 	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //

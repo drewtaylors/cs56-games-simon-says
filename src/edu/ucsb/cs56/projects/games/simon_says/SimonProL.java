@@ -121,7 +121,7 @@ public class SimonProL extends JFrame{
 	    bottomInner.revalidate();
 	    bottomInner.repaint();
 
-	    startButton.removeActionListener(this);
+	    //startButton.removeActionListener(this);
 
 	    new Thread(new Runnable() {
 		    public void run() {

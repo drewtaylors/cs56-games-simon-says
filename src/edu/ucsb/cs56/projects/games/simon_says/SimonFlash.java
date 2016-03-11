@@ -190,7 +190,8 @@ public class SimonFlash
                 for(String token:HighestScore){
                     s=token;
                 }
-                //highScore= Integer.parseInt(String.valueOf(s));
+		//System.out.println("testing: " + s + " end of line");
+                highScore= Integer.parseInt(String.valueOf(s));
                 reader.close();
 
                 if(highScore<Score){

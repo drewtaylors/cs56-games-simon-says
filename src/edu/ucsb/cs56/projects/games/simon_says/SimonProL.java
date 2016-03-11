@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 public class SimonProL extends JFrame{
 	SimonButton redButton;
@@ -15,6 +17,7 @@ public class SimonProL extends JFrame{
     JButton startButton;
     JButton returnButton;
     JLabel score;
+    JLabel HighScore;
     //ArrayList<SimonButton> buttonList;
     
     JPanel center;
@@ -24,6 +27,8 @@ public class SimonProL extends JFrame{
     JPanel topCenter;
     JPanel bottomCenter;
     JPanel topInner;
+
+    String l2;
 
     /** No-arg frame constructor, sets up frame and layout of panels and components
      */
@@ -93,10 +98,26 @@ public class SimonProL extends JFrame{
 	                                                           // of the proper size will remain behind it
 	this.getContentPane().add(BorderLayout.SOUTH, bottomInner); //
 
+	try {
+	    File myFile = new File("HighScoreProLevel.txt");
+	    FileReader fileReader = new FileReader(myFile);
+	    BufferedReader reader = new BufferedReader(fileReader);
+	    String line2;
+	    while((line2=reader.readLine())!=null) {
+		l2=line2;
+	    }
+	    System.out.println(l2);
+	    HighScore = new JLabel(l2);
+	    HighScore.setForeground(Color.WHITE);
+	}
+	catch (IOException ex) {
+	    ex.printStackTrace();
+	}
     score = new JLabel("Score: 0  ");
     score.setForeground(Color.WHITE);
     topInner = new JPanel(new BorderLayout());
 
+    topInner.add(BorderLayout.WEST, HighScore);
     topInner.add(BorderLayout.EAST,score);
     this.topInner.add(Box.createRigidArea(fillerSizeVert));
     this.getContentPane().add(BorderLayout.NORTH, topInner);
@@ -162,7 +183,7 @@ public class SimonProL extends JFrame{
 	
 	ArrayList<Integer> test_array =  new ArrayList<Integer>();
 	test_array.add(randomNum2); // one element to start off with
-	SimonProFlash flash = new SimonProFlash(test_array, button_array, startButton, returnButton, bottomInner, score);
+	SimonProFlash flash = new SimonProFlash(test_array, button_array, startButton, returnButton, bottomInner, HighScore, score);
 	flash.go();
 	System.out.println("after flash sequence"); // DEBUG}
     }
